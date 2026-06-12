@@ -1,0 +1,33 @@
+name: Notion 작업로그 기록
+
+# 모든 브랜치 푸시에서 실행
+on:
+  push:
+    branches:
+      - "**"
+
+# 동시에 여러 푸시가 들어와도 한 번에 하나씩 처리(행 중복 방지)
+concurrency:
+  group: notion-worklog
+  cancel-in-progress: false
+
+jobs:
+  log-to-notion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Notion 클라이언트 설치
+        run: npm install @notionhq/client@2
+
+      - name: 작업로그 전송
+        run: node .github/scripts/notion-worklog.js
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          TEAM_DB_ID: ${{ secrets.TEAM_DB_ID }}
+          WORKLOG_DB_ID: ${{ secrets.WORKLOG_DB_ID }}
+          GH_ACTOR: ${{ github.actor }}
