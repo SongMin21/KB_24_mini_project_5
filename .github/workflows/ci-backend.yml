@@ -1,0 +1,44 @@
+name: CI 백엔드 (Spring + Gradle)
+
+# backend/ 안이 바뀐 push/PR 에서만 실행
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "backend/**"
+      - ".github/workflows/ci-backend.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - ".github/workflows/ci-backend.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 아직 프로젝트가 없으면 건너뜀
+      - name: 백엔드 존재 확인
+        id: check
+        run: |
+          if [ -f backend/gradlew ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "백엔드 프로젝트 없음 — 건너뜀"
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: JDK 설정
+        if: steps.check.outputs.exists == 'true'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17" # ← 프로젝트 Java 버전에 맞게 변경
+
+      - name: Gradle 빌드
+        if: steps.check.outputs.exists == 'true'
+        working-directory: backend
+        run: |
+          chmod +x gradlew
+          ./gradlew build --no-daemon
