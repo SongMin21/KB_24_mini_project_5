@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,5 +33,15 @@ class ThinkingMapperTest {
         for(ThinkingVO vo : list) {
             System.out.println(vo);
         }
+    }
+
+    @Test
+    @DisplayName("Thinking mapper getByDate")
+    public void getByDate() {
+        log.info("getByDate test");
+        LocalDate localDate = LocalDate.of(2026, 6, 18);
+        // 2. LocalDate -> java.util.Date 변환
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        List<ThinkingVO> list = mapper.getByDate(date);
     }
 }

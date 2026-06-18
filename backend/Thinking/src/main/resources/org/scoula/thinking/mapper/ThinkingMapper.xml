@@ -7,4 +7,8 @@
     <select id="getList" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT * FROM thinking_tbl
     </select>
+
+    <select id="getByDate" resultType="org.scoula.thinking.domain.ThinkingVO">
+        SELECT * FROM thinking_tbl WHERE DATE(created_at) = #{date}
+    </select>
 </mapper>
