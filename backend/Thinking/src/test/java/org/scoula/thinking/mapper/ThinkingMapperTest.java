@@ -31,4 +31,12 @@ class ThinkingMapperTest {
             System.out.println(vo);
         }
     }
+
+    @Test
+    @DisplayName("Thinking mapper updateLike")
+    public void updateLike() {
+        log.info("update like");
+        int cnt = mapper.updateLike(3L);
+        log.info("update : " + cnt);
+    }
 }

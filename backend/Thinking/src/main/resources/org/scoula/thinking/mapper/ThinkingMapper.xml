@@ -5,6 +5,12 @@
 
 <mapper namespace="org.scoula.thinking.mapper.ThinkingMapper">
     <select id="getList" resultType="org.scoula.thinking.domain.ThinkingVO">
-        SELECT * FROM thinking_tbl
+        SELECT *
+        FROM thinking_tbl
     </select>
+    <update id="updateLike">
+        UPDATE thinking_tbl
+        SET like_count = like_count + 1
+        WHERE id = #{id}
+    </update>
 </mapper>
