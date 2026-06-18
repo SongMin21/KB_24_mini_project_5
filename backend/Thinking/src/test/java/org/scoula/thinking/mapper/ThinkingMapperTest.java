@@ -28,7 +28,7 @@ class ThinkingMapperTest {
         log.info("getList test");
         List<ThinkingVO> list = mapper.getList();
         for(ThinkingVO vo : list) {
-            System.out.println(vo);
+            log.info(vo);
         }
     }
 }
