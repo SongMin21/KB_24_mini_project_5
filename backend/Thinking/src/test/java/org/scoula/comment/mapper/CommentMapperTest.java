@@ -13,6 +13,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.swing.*;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -46,5 +48,17 @@ class CommentMapperTest {
         Assertions.assertEquals(1, resultCount); // 1건 성공 단언
 
         log.info("--------- VO 기반 수정 테스트 종료");
+    }
+
+    @Test
+    @DisplayName("Comment mapper -> selectComment()")
+    public void selectComment(){
+        log.info("selectComment");
+        Long thinkingId = 1L;
+        List<CommentVO> list = commentMapper.selectComment(thinkingId);
+        log.info("조회된 댓글 총 개수: " + list.size());
+        for(CommentVO vo : list){
+            System.out.println("댓글:" + vo);
+        }
     }
 }
