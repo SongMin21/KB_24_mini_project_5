@@ -13,4 +13,7 @@
         SET like_count = like_count + 1
         WHERE id = #{id}
     </update>
+    <select id="getByDate" resultType="org.scoula.thinking.domain.ThinkingVO">
+        SELECT * FROM thinking_tbl WHERE DATE(created_at) = #{date}
+    </select>
 </mapper>
