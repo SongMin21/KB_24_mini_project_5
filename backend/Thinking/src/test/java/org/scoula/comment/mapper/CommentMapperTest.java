@@ -28,8 +28,10 @@ class CommentMapperTest {
         log.info("updateComment");
         log.info("--------- VO 기반 수정 테스트 시작");
 
+        // test용 dummy 객체 생성 및 데이터 세팅
         CommentVO updateCom = new CommentVO();
         updateCom.setId(1L);
+        updateCom.setPassword("c123");
         updateCom.setContent("updateComment test - 수정된 댓글입니다~~ 선플을 달아부아용~~");
 
 
@@ -39,6 +41,7 @@ class CommentMapperTest {
                // .content("updateComment test - 수정 댓글 내용입니다~~ 선플을 달아부아용~~") // 바꿀 내용
                // .build();
 
+        // 매퍼 실행 및 결과 담기
         int resultCount = commentMapper.updateComment(updateCom);
 
         // 결과 검증
