@@ -151,5 +151,4 @@ jdbc.password=[db_password]
 
 <p align="center">
   <b>이현주 · 강민주 · 복원준 · 이현서</b><br>
-  2026.06.16 ~
 </p>
