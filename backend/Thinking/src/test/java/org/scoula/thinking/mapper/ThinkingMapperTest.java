@@ -36,6 +36,14 @@ class ThinkingMapperTest {
     }
 
     @Test
+    @DisplayName("Thinking mapper updateLike")
+    public void updateLike() {
+        log.info("update like");
+        int cnt = mapper.updateLike(3L);
+        log.info("update : " + cnt);
+    }
+  
+    @Test
     @DisplayName("Thinking mapper getByDate")
     public void getByDate() {
         log.info("getByDate test");
