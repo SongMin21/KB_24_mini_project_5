@@ -31,4 +31,12 @@ class ThinkingMapperTest {
             System.out.println(vo);
         }
     }
+
+    @Test
+    @DisplayName("Thinking mapper getListOne")
+    public void getListOne(){
+        log.info("getListOne test");
+        ThinkingVO thinking = mapper.getListOne(1L);
+        log.info(thinking);
+    }
 }

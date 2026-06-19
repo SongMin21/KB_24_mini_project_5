@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ThinkingMapper {
     public List<ThinkingVO> getList();
+    public ThinkingVO getListOne(long id);
 }

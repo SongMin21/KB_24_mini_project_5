@@ -2,6 +2,7 @@
 <project version="4">
   <component name="DataSourcePerFileMappings">
     <file url="file://$PROJECT_DIR$/comments.sql" value="d9e69c8a-4eb1-473a-8c23-554d89bf4e65" />
+    <file url="file://$PROJECT_DIR$/db.sql" value="d9e69c8a-4eb1-473a-8c23-554d89bf4e65" />
     <file url="file://$PROJECT_DIR$/thinking.sql" value="d9e69c8a-4eb1-473a-8c23-554d89bf4e65" />
   </component>
 </project>
