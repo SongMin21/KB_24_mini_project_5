@@ -40,8 +40,10 @@ class ThinkingMapperTest {
     public void getByDate() {
         log.info("getByDate test");
         LocalDate localDate = LocalDate.of(2026, 6, 18);
-        // 2. LocalDate -> java.util.Date 변환
         Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
         List<ThinkingVO> list = mapper.getByDate(date);
+        assertNotNull(list);
+        assertFalse(list.isEmpty());
     }
 }
