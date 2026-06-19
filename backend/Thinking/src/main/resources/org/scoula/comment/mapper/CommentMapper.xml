@@ -8,5 +8,6 @@
         UPDATE comment_tbl
         SET content = #{content}
         WHERE id = #{id}
+            AND password = #{password}
     </update>
 </mapper>
