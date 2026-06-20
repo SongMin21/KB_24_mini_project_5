@@ -14,7 +14,6 @@
             id,
             thinking_id,
             content,
-            password,
             created_at,
             updated_at
         FROM comment_tbl
