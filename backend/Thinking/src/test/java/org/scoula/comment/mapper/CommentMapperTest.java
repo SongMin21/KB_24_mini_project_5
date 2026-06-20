@@ -63,4 +63,27 @@ class CommentMapperTest {
         commentMapper.create(comment);
         log.info(comment);
     }
+
+    @Test
+    @DisplayName("Comment Mapper -> deleteComment()")
+    public void deleteComment() {
+        log.info("deleteComment");
+        log.info("--------- 삭제 테스트 시작");
+
+        // 기존 DB 데이터(id=3) 삭제 테스트
+        // Builder 사용
+         CommentVO deleteCom = CommentVO.builder()
+             .id(3L)
+             .password("c789")
+             .build();
+
+        // 매퍼 실행 및 결과 담기
+        int resultCount = commentMapper.deleteComment(deleteCom);
+
+        // 결과 검증
+        log.info("삭제된 행의 개수: " + resultCount);
+        Assertions.assertEquals(1, resultCount); // 1건 성공 단언
+
+        log.info("--------- 삭제 테스트 종료");
+    }
 }

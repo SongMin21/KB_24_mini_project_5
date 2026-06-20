@@ -17,4 +17,9 @@
         WHERE id = #{id}
             AND password = #{password}
     </update>
+    <delete id="deleteComment">
+        DELETE FROM comment_tbl
+        WHERE id = #{id}
+            AND password = #{password}
+    </delete>
 </mapper>
