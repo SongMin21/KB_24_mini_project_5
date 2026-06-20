@@ -4,6 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.scoula.comment.mapper.CommentMapper">
+    <insert id="create">
+        INSERT INTO comment_tbl(thinking_id, content, password)
+        VALUES (#{thinkingId}, #{content}, #{password})
+        <selectKey resultType="long" keyProperty="id" keyColumn="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
     <update id="updateComment">
         UPDATE comment_tbl
         SET content = #{content}
