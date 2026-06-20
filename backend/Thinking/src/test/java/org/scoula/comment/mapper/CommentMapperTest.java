@@ -50,4 +50,17 @@ class CommentMapperTest {
 
         log.info("--------- VO 기반 수정 테스트 종료");
     }
+
+    @Test
+    @DisplayName("create comment")
+    public void create() {
+        CommentVO comment = CommentVO.builder()
+                .thinkingId(1L)
+                .content("content01")
+                .password("password")
+                .build();
+
+        commentMapper.create(comment);
+        log.info(comment);
+    }
 }
