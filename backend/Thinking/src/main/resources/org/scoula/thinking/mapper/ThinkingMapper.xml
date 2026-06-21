@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.scoula.thinking.mapper.ThinkingMapper">
+    <delete id="delete">
+        delete from thinking_tbl
+               where no = #{no}
+    </delete>
     <select id="getList" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT *
         FROM thinking_tbl
