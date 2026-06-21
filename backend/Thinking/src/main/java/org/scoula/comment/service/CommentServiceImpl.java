@@ -1,6 +1,6 @@
 package org.scoula.comment.service;
 
-public class CommentServiceImpl {
+public class CommentServiceImpl implements CommentService{
     // 강민주
 
     // 복원준
