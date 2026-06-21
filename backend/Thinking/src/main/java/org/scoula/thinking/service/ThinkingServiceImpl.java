@@ -1,6 +1,6 @@
 package org.scoula.thinking.service;
 
-public class ThinkingServiceImpl {
+public class ThinkingServiceImpl implements ThinkingService{
 
     // 강민주
 
