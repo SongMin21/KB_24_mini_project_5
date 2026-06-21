@@ -4,6 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.scoula.thinking.mapper.ThinkingMapper">
+    <update id="update">
+        update thinking_tbl set
+        id = #{id},
+        category = #{category},
+        title = #{title},
+        content = #{content},
+        password = #{password},
+        like_count = #{likeCount},
+        created_at = #{createdAt},
+        updated_at = #{updatedAt}
+        where no = #{no}
+
+    </update>
+
+<!--    <delete id="delete">-->
+<!--        delete from thinking_tbl where no = #{no}-->
+<!--    </delete>-->
+
     <select id="getList" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT * FROM thinking_tbl
     </select>

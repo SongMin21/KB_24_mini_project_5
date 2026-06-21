@@ -31,4 +31,18 @@ class ThinkingMapperTest {
             System.out.println(vo);
         }
     }
+
+    public void update(){
+        ThinkingVO Thinking = new ThinkingVO();
+        //수정사항들 적기
+//        Thinking.setNo(5L);
+        Thinking.setTitle("수정된 제목");
+        Thinking.setContent("수정된 내용");
+//        Thinking.setWriter("user00");
+
+
+        int count = mapper.update(Thinking);
+        log.info("Update count : {}", count);
+    }
+
 }
