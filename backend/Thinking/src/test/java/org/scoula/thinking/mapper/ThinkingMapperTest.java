@@ -18,7 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {RootConfig.class})
+@ContextConfiguration(classes={RootConfig.class})
 @Log4j2
 class ThinkingMapperTest {
 
@@ -30,8 +30,8 @@ class ThinkingMapperTest {
     public void getList() {
         log.info("getList test");
         List<ThinkingVO> list = mapper.getList();
-        for (ThinkingVO vo : list) {
-            System.out.println(vo);
+        for(ThinkingVO vo : list) {
+            log.info(vo);
         }
     }
 
