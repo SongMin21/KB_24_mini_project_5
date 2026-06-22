@@ -64,6 +64,13 @@ class ThinkingMapperTest {
     }
 
     @Test
+    @DisplayName("Thinking mapper getPassword")
+    public void getPassword() {
+        log.info("getPassword Test");
+        String password = mapper.getPassword(1L);
+        log.info("password : " + password);
+      
+    @Test
     @DisplayName("Thinking mapper getListOne")
     public void getListOne(){
         log.info("getListOne test");
