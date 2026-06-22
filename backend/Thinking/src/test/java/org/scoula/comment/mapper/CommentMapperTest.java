@@ -51,6 +51,19 @@ class CommentMapperTest {
     }
 
     @Test
+    @DisplayName("create comment")
+    public void create() {
+        CommentVO comment = CommentVO.builder()
+                .thinkingId(1L)
+                .content("content01")
+                .password("password")
+                .build();
+
+        commentMapper.create(comment);
+        log.info(comment);
+    }
+
+    @Test
     @DisplayName("Comment mapper -> selectComment()")
     public void selectComment(){
         log.info("selectComment");
