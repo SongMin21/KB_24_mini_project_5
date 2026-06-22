@@ -4,6 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.scoula.thinking.mapper.ThinkingMapper">
+    <insert id="create">
+        INSERT INTO thinking_tbl (category, title, content, password)
+        VALUES (#{category}, #{title}, #{content}, #{password})
+
+        <selectKey resultType="Long" keyProperty="id" keyColumn="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
     <select id="getList" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT *
         FROM thinking_tbl
@@ -15,5 +23,11 @@
     </update>
     <select id="getByDate" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT * FROM thinking_tbl WHERE DATE(created_at) = #{date}
+    </select>
+    <select id="getListOne" resultType="org.scoula.thinking.domain.ThinkingVO">
+        SELECT
+            id,category, title, content, password, like_count, created_at, updated_at
+        FROM thinking_tbl
+        WHERE id = #{id}
     </select>
 </mapper>
