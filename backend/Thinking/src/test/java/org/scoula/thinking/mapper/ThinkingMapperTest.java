@@ -36,13 +36,21 @@ class ThinkingMapperTest {
     }
 
     @Test
+    @DisplayName("Thinking mapper create")
+    public void create(){
+        ThinkingVO thinking = new ThinkingVO();
+        thinking.setCategory("LEARNED");
+        thinking.setTitle("새로 작성하는 제목");
+        thinking.setContent("새로 작성하는 내용");
+        thinking.setPassword("1234");
+        mapper.create(thinking);
     @DisplayName("Thinking mapper updateLike")
     public void updateLike() {
         log.info("update like");
         int cnt = mapper.updateLike(3L);
         log.info("update : " + cnt);
     }
-  
+
     @Test
     @DisplayName("Thinking mapper getByDate")
     public void getByDate() {
@@ -61,5 +69,12 @@ class ThinkingMapperTest {
         log.info("getPassword Test");
         String password = mapper.getPassword(1L);
         log.info("password : " + password);
+      
+    @Test
+    @DisplayName("Thinking mapper getListOne")
+    public void getListOne(){
+        log.info("getListOne test");
+        ThinkingVO thinking = mapper.getListOne(1L);
+        log.info(thinking);
     }
 }
