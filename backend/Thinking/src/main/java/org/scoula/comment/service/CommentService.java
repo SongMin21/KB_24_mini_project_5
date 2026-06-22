@@ -8,7 +8,7 @@ public interface CommentService {
     // 복원준
 
     // 이현서
-    public boolean update(CommentUpdateDTO dto);
+    public boolean update(CommentUpdateDTO comment);
 
     // 이현주
 }
