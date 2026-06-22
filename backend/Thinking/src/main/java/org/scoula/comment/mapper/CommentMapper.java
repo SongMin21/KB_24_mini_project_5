@@ -14,14 +14,13 @@ public interface CommentMapper {
     public List<CommentVO> selectComment(
             @Param("thinking_id") Long thinking_id
     );
-    // 💡 번호와 내용을 콕 집어서 배달합니다. 성공 개수(int) 리턴!
-    // public int updateComment(@Param("id") long id, @Param("content") String content);
 
     // create comment
     public void create(CommentVO comment);
 
     // get password
     public String getPassword(long id);
+
     // delete comment
     public int deleteComment(CommentVO comment);
 }
