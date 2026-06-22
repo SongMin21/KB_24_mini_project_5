@@ -22,4 +22,16 @@
         WHERE id = #{id}
             AND password = #{password}
     </delete>
+    <select id="selectComment" resultType="org.scoula.comment.domain.CommentVO">
+        SELECT
+            id,
+            thinking_id,
+            content,
+            created_at,
+            updated_at
+        FROM comment_tbl
+        WHERE thinking_id = #{thinking_id}
+        ORDER BY created_at ASC
+    </select>
+
 </mapper>
