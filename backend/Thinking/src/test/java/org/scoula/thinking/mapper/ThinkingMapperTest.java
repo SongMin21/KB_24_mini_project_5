@@ -36,6 +36,14 @@ class ThinkingMapperTest {
     }
 
     @Test
+    @DisplayName("Thinking mapper create")
+    public void create(){
+        ThinkingVO thinking = new ThinkingVO();
+        thinking.setCategory("LEARNED");
+        thinking.setTitle("새로 작성하는 제목");
+        thinking.setContent("새로 작성하는 내용");
+        thinking.setPassword("1234");
+        mapper.create(thinking);
     @DisplayName("Thinking mapper updateLike")
     public void updateLike() {
         log.info("update like");
