@@ -13,6 +13,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.swing.*;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -59,5 +61,23 @@ class CommentMapperTest {
 
         commentMapper.create(comment);
         log.info(comment);
+    }
+
+    @Test
+    @DisplayName("Comment mapper -> selectComment()")
+    public void selectComment(){
+        log.info("selectComment");
+
+        Long thinkingId = 1L;
+        List<CommentVO> list = commentMapper.selectComment(thinkingId);
+
+        assertNotNull(list);
+
+        log.info("조회된 댓글 총 개수: " + list.size());
+
+        for(CommentVO vo : list){
+            assertEquals(thinkingId, vo.getThinkingId()); // 조회한 댓글들이 요청한 thinkingId의 댓글인지 확인
+            System.out.println("댓글:" + vo);
+        }
     }
 }
