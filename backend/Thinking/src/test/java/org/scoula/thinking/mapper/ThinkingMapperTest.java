@@ -18,7 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes={RootConfig.class})
+@ContextConfiguration(classes = {RootConfig.class})
 @Log4j2
 class ThinkingMapperTest {
 
@@ -30,20 +30,23 @@ class ThinkingMapperTest {
     public void getList() {
         log.info("getList test");
         List<ThinkingVO> list = mapper.getList();
-        for(ThinkingVO vo : list) {
+        for (ThinkingVO vo : list) {
             System.out.println(vo);
         }
     }
 
     @Test
     @DisplayName("Thinking mapper create")
-    public void create(){
+    public void create() {
         ThinkingVO thinking = new ThinkingVO();
         thinking.setCategory("LEARNED");
         thinking.setTitle("새로 작성하는 제목");
         thinking.setContent("새로 작성하는 내용");
         thinking.setPassword("1234");
         mapper.create(thinking);
+    }
+
+    @Test
     @DisplayName("Thinking mapper updateLike")
     public void updateLike() {
         log.info("update like");
@@ -55,7 +58,7 @@ class ThinkingMapperTest {
     @DisplayName("Thinking mapper getByDate")
     public void getByDate() {
         log.info("getByDate test");
-        LocalDate localDate = LocalDate.of(2026, 6, 18);
+        LocalDate localDate = LocalDate.of(2026, 6, 1);
         Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         List<ThinkingVO> list = mapper.getByDate(date);
@@ -64,12 +67,27 @@ class ThinkingMapperTest {
     }
 
     @Test
+    @DisplayName("Thinking mapper getByLike(Desc)")
+    public void getByLike() {
+        log.info("getByLike test");
+
+        // 매퍼를 통해 좋아요 내림차순 정렬 리스트 가져오기
+        List<ThinkingVO> list = mapper.getByLike();
+        // 결과 검증 - 리스트가 비어있지 않은지 확인
+        assertNotNull(list);
+        assertFalse(list.isEmpty());
+
+    }
+
+
+    @Test
     @DisplayName("Thinking mapper getPassword")
     public void getPassword() {
         log.info("getPassword Test");
         String password = mapper.getPassword(1L);
         log.info("password : " + password);
-      
+    }
+
     @Test
     @DisplayName("Thinking mapper getListOne")
     public void getListOne(){
