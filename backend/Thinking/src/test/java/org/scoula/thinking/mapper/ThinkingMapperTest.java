@@ -18,7 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes={RootConfig.class})
+@ContextConfiguration(classes = {RootConfig.class})
 @Log4j2
 class ThinkingMapperTest {
 
@@ -30,9 +30,20 @@ class ThinkingMapperTest {
     public void getList() {
         log.info("getList test");
         List<ThinkingVO> list = mapper.getList();
-        for(ThinkingVO vo : list) {
+        for (ThinkingVO vo : list) {
             System.out.println(vo);
         }
+    }
+
+    @Test
+    @DisplayName("Thinking mapper create")
+    public void create() {
+        ThinkingVO thinking = new ThinkingVO();
+        thinking.setCategory("LEARNED");
+        thinking.setTitle("새로 작성하는 제목");
+        thinking.setContent("새로 작성하는 내용");
+        thinking.setPassword("1234");
+        mapper.create(thinking);
     }
 
     @Test
@@ -42,7 +53,7 @@ class ThinkingMapperTest {
         int cnt = mapper.updateLike(3L);
         log.info("update : " + cnt);
     }
-  
+
     @Test
     @DisplayName("Thinking mapper getByDate")
     public void getByDate() {
@@ -68,4 +79,20 @@ class ThinkingMapperTest {
 
     }
 
+
+    @Test
+    @DisplayName("Thinking mapper getPassword")
+    public void getPassword() {
+        log.info("getPassword Test");
+        String password = mapper.getPassword(1L);
+        log.info("password : " + password);
+    }
+
+    @Test
+    @DisplayName("Thinking mapper getListOne")
+    public void getListOne(){
+        log.info("getListOne test");
+        ThinkingVO thinking = mapper.getListOne(1L);
+        log.info(thinking);
+    }
 }
