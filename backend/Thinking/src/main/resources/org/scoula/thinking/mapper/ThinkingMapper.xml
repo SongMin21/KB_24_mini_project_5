@@ -7,32 +7,40 @@
     <insert id="create">
         INSERT INTO thinking_tbl (category, title, content, password)
         VALUES (#{category}, #{title}, #{content}, #{password})
-
         <selectKey resultType="Long" keyProperty="id" keyColumn="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+
     <select id="getList" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT *
         FROM thinking_tbl
     </select>
+
     <update id="updateLike">
         UPDATE thinking_tbl
         SET like_count = like_count + 1
         WHERE id = #{id}
     </update>
+
     <select id="getByDate" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT * FROM thinking_tbl WHERE DATE(created_at) = #{date}
     </select>
+
     <select id="getPassword" resultType="java.lang.String">
         SELECT password
         FROM thinking_tbl
         WHERE id = #{id}
     </select>
+
     <select id="getListOne" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT
             id,category, title, content, password, like_count, created_at, updated_at
         FROM thinking_tbl
         WHERE id = #{id}
+    </select>
+
+    <select id="getByLike" resultType="org.scoula.thinking.domain.ThinkingVO">
+        SELECT * FROM thinking_tbl ORDER BY like_count DESC;
     </select>
 </mapper>
