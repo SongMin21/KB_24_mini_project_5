@@ -6,7 +6,7 @@
 <mapper namespace="org.scoula.thinking.mapper.ThinkingMapper">
     <delete id="delete">
         delete from thinking_tbl
-               where no = #{no}
+               where id = #{id}
     </delete>
     <select id="getList" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT *
