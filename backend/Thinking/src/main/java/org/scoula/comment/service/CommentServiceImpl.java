@@ -19,9 +19,9 @@ public class CommentServiceImpl implements CommentService{
 
     // 이현서
     @Override
-    public boolean update(CommentUpdateDTO dto) {
-        log.info("update : " + dto);
-        return mapper.updateComment(dto.toVo()) == 1;
+    public boolean update(CommentUpdateDTO comment) {
+        log.info("update : " + comment);
+        return mapper.updateComment(comment.toVo()) == 1;
     }
 
     // 이현주
