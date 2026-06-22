@@ -16,4 +16,9 @@
         SET content = #{content}
         WHERE id = #{id}
     </update>
+    <select id="getPassword" resultType="java.lang.String">
+        SELECT password
+        FROM comment_tbl
+        WHERE id = #{id}
+    </select>
 </mapper>

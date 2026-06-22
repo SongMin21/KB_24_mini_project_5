@@ -54,4 +54,12 @@ class ThinkingMapperTest {
         assertNotNull(list);
         assertFalse(list.isEmpty());
     }
+
+    @Test
+    @DisplayName("Thinking mapper getPassword")
+    public void getPassword() {
+        log.info("getPassword Test");
+        String password = mapper.getPassword(1L);
+        log.info("password : " + password);
+    }
 }

@@ -12,4 +12,7 @@ public interface CommentMapper {
 
     // create comment
     public void create(CommentVO comment);
+
+    // get password
+    public String getPassword(long id);
 }
