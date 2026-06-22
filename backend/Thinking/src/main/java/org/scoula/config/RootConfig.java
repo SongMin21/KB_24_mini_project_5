@@ -22,7 +22,7 @@ import javax.sql.DataSource;
         "org.scoula.thinking.mapper",
         "org.scoula.comment.mapper"
 })
-@ComponentScan(basePackages = {"org.scoula.thinking.service", "org.scoula.comment.service"})
+@ComponentScan(basePackages = {"org.scoula.thinking.service"})
 public class RootConfig {
     @Value("${jdbc.driver}")
     String driver;
