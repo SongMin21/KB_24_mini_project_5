@@ -18,7 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes={RootConfig.class})
+@ContextConfiguration(classes = {RootConfig.class})
 @Log4j2
 class CommentMapperTest {
     @Autowired
@@ -39,9 +39,9 @@ class CommentMapperTest {
 
         // Builder 사용 버전
         // CommentVO updateCom = CommentVO.builder()
-               // .id(1L)                                     // 어떤 댓글을 고칠지 (기준키)
-               // .content("updateComment test - 수정 댓글 내용입니다~~ 선플을 달아부아용~~") // 바꿀 내용
-               // .build();
+        // .id(1L)                                     // 어떤 댓글을 고칠지 (기준키)
+        // .content("updateComment test - 수정 댓글 내용입니다~~ 선플을 달아부아용~~") // 바꿀 내용
+        // .build();
 
         // 매퍼 실행 및 결과 담기
         int resultCount = commentMapper.updateComment(updateCom);
@@ -73,7 +73,8 @@ class CommentMapperTest {
         String password = commentMapper.getPassword(1L);
         log.info("password : " + password);
     }
-}
+
+
     @Test
     @DisplayName("Comment Mapper -> deleteComment()")
     public void deleteComment() {
@@ -82,10 +83,10 @@ class CommentMapperTest {
 
         // 기존 DB 데이터(id=3) 삭제 테스트
         // Builder 사용
-         CommentVO deleteCom = CommentVO.builder()
-             .id(3L)
-             .password("c789")
-             .build();
+        CommentVO deleteCom = CommentVO.builder()
+                .id(3L)
+                .password("c789")
+                .build();
 
         // 매퍼 실행 및 결과 담기
         int resultCount = commentMapper.deleteComment(deleteCom);
@@ -96,9 +97,10 @@ class CommentMapperTest {
 
         log.info("--------- 삭제 테스트 종료");
     }
-}
+
+    @Test
     @DisplayName("Comment mapper -> selectComment()")
-    public void selectComment(){
+    public void selectComment() {
         log.info("selectComment");
 
         Long thinkingId = 1L;
@@ -108,7 +110,7 @@ class CommentMapperTest {
 
         log.info("조회된 댓글 총 개수: " + list.size());
 
-        for(CommentVO vo : list){
+        for (CommentVO vo : list) {
             assertEquals(thinkingId, vo.getThinkingId()); // 조회한 댓글들이 요청한 thinkingId의 댓글인지 확인
             System.out.println("댓글:" + vo);
         }
