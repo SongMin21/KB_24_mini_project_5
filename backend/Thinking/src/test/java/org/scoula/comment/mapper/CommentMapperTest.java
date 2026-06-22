@@ -67,6 +67,14 @@ class CommentMapperTest {
     }
 
     @Test
+    @DisplayName("Comment mapper getPassword")
+    public void getPassword() {
+        log.info("getPassword Test");
+        String password = commentMapper.getPassword(1L);
+        log.info("password : " + password);
+    }
+}
+    @Test
     @DisplayName("Comment Mapper -> deleteComment()")
     public void deleteComment() {
         log.info("deleteComment");
