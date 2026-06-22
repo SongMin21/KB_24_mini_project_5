@@ -9,5 +9,5 @@ public interface ThinkingMapper {
     public List<ThinkingVO> getList();
     public int updateLike(long id);
     public List<ThinkingVO> getByDate(Date date);
-    public int delete(long no);
+    public int delete(long id);
 }
