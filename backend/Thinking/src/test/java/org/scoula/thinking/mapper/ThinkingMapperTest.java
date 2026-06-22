@@ -42,7 +42,7 @@ class ThinkingMapperTest {
         int cnt = mapper.updateLike(3L);
         log.info("update : " + cnt);
     }
-  
+
     @Test
     @DisplayName("Thinking mapper getByDate")
     public void getByDate() {
@@ -53,5 +53,13 @@ class ThinkingMapperTest {
         List<ThinkingVO> list = mapper.getByDate(date);
         assertNotNull(list);
         assertFalse(list.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Thinking mapper getListOne")
+    public void getListOne(){
+        log.info("getListOne test");
+        ThinkingVO thinking = mapper.getListOne(1L);
+        log.info(thinking);
     }
 }

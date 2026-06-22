@@ -16,4 +16,10 @@
     <select id="getByDate" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT * FROM thinking_tbl WHERE DATE(created_at) = #{date}
     </select>
+    <select id="getListOne" resultType="org.scoula.thinking.domain.ThinkingVO">
+        SELECT
+            id,category, title, content, password, like_count, created_at, updated_at
+        FROM thinking_tbl
+        WHERE id = #{id}
+    </select>
 </mapper>
