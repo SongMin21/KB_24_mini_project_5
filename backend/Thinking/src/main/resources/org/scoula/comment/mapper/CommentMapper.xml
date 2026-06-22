@@ -17,6 +17,11 @@
         WHERE id = #{id}
             AND password = #{password}
     </update>
+    <delete id="deleteComment">
+        DELETE FROM comment_tbl
+        WHERE id = #{id}
+            AND password = #{password}
+    </delete>
     <select id="selectComment" resultType="org.scoula.comment.domain.CommentVO">
         SELECT
             id,

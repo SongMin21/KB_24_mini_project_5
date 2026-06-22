@@ -19,4 +19,7 @@ public interface CommentMapper {
 
     // create comment
     public void create(CommentVO comment);
+
+    // delete comment
+    public int deleteComment(CommentVO comment);
 }
