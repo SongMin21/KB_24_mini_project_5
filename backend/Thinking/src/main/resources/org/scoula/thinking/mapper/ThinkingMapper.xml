@@ -13,6 +13,21 @@
         </selectKey>
     </insert>
     <select id="getList" resultType="org.scoula.thinking.domain.ThinkingVO">
-        SELECT * FROM thinking_tbl
+        SELECT *
+        FROM thinking_tbl
+    </select>
+    <update id="updateLike">
+        UPDATE thinking_tbl
+        SET like_count = like_count + 1
+        WHERE id = #{id}
+    </update>
+    <select id="getByDate" resultType="org.scoula.thinking.domain.ThinkingVO">
+        SELECT * FROM thinking_tbl WHERE DATE(created_at) = #{date}
+    </select>
+    <select id="getListOne" resultType="org.scoula.thinking.domain.ThinkingVO">
+        SELECT
+            id,category, title, content, password, like_count, created_at, updated_at
+        FROM thinking_tbl
+        WHERE id = #{id}
     </select>
 </mapper>

@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,6 +44,30 @@ class ThinkingMapperTest {
         thinking.setContent("새로 작성하는 내용");
         thinking.setPassword("1234");
         mapper.create(thinking);
+    @DisplayName("Thinking mapper updateLike")
+    public void updateLike() {
+        log.info("update like");
+        int cnt = mapper.updateLike(3L);
+        log.info("update : " + cnt);
+    }
+
+    @Test
+    @DisplayName("Thinking mapper getByDate")
+    public void getByDate() {
+        log.info("getByDate test");
+        LocalDate localDate = LocalDate.of(2026, 6, 18);
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        List<ThinkingVO> list = mapper.getByDate(date);
+        assertNotNull(list);
+        assertFalse(list.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Thinking mapper getListOne")
+    public void getListOne(){
+        log.info("getListOne test");
+        ThinkingVO thinking = mapper.getListOne(1L);
         log.info(thinking);
     }
 }
