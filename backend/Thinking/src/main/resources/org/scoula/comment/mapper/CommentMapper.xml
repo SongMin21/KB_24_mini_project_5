@@ -16,4 +16,16 @@
         SET content = #{content}
         WHERE id = #{id}
     </update>
+    <select id="selectComment" resultType="org.scoula.comment.domain.CommentVO">
+        SELECT
+            id,
+            thinking_id,
+            content,
+            created_at,
+            updated_at
+        FROM comment_tbl
+        WHERE thinking_id = #{thinking_id}
+        ORDER BY created_at ASC
+    </select>
+
 </mapper>
