@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
-    <file url="file://$PROJECT_DIR$/comments.sql" value="3551cda3-ee35-4b3e-984d-170a1e1899b8" />
-    <file url="file://$PROJECT_DIR$/db.sql" value="7e639de4-7ae1-456b-9372-0f9d84abfff9" />
-    <file url="file://$PROJECT_DIR$/thinking.sql" value="3551cda3-ee35-4b3e-984d-170a1e1899b8" />
+    <file url="file://$PROJECT_DIR$/comments.sql" value="d9e69c8a-4eb1-473a-8c23-554d89bf4e65" />
+    <file url="file://$PROJECT_DIR$/db.sql" value="d9e69c8a-4eb1-473a-8c23-554d89bf4e65" />
+    <file url="file://$PROJECT_DIR$/thinking.sql" value="d9e69c8a-4eb1-473a-8c23-554d89bf4e65" />
   </component>
 </project>
