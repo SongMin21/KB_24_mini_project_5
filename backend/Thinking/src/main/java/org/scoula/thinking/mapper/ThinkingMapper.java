@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ThinkingMapper {
     public List<ThinkingVO> getList();
+    public void create(ThinkingVO thinking);
     public ThinkingVO getListOne(
             @Param("id") long id
     );
