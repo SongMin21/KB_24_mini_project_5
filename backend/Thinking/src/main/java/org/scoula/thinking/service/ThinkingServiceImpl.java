@@ -7,6 +7,7 @@ import org.scoula.thinking.dto.ThinkingDTO;
 import org.scoula.thinking.mapper.ThinkingMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,6 +29,16 @@ public class ThinkingServiceImpl implements ThinkingService{
 
 
     // 강민주
+    @Override
+    public List<ThinkingDTO> getByDate(Date date) {
+        // mapper -> vo를 조회
+        List<ThinkingVO> vo = mapper.getByDate(date);
+        // List<ThinkingDTO> 변환
+        List<ThinkingDTO> dto = vo.stream().map(ThinkingDTO::of).toList();
+        // 리턴
+        return dto;
+    }
+
 
     // 복원준
 
