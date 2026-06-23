@@ -10,6 +10,7 @@ public interface ThinkingService {
 
     // 강민주
 
+    public boolean updateLike(long id);
     // 복원준
 
     // 이현서

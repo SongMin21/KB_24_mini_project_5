@@ -29,6 +29,13 @@ public class ThinkingServiceImpl implements ThinkingService{
 
     // 강민주
 
+    // update like(like +1)
+    @Override
+    public boolean updateLike(long id) {
+        int count = mapper.updateLike(id);
+        return count == 1;
+    }
+
     // 복원준
 
     // 이현서
