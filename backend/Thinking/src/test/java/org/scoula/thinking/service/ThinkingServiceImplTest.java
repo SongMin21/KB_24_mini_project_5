@@ -31,4 +31,11 @@ class ThinkingServiceImplTest {
             log.info(dto);
         }
     }
+
+    @Test
+    @DisplayName("update like service test")
+    void updateLike() {
+        log.info("update like service test");
+        log.info(service.updateLike(1L));
+    }
 }
