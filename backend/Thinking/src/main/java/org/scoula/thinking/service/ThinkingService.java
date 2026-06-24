@@ -1,5 +1,6 @@
 package org.scoula.thinking.service;
 
+import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface ThinkingService {
     // 이현서
 
     // 이현주
+    public void create(ThinkingCreateDTO thinking);
 }

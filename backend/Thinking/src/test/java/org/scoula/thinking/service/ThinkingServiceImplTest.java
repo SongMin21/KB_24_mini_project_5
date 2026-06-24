@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.scoula.config.RootConfig;
+import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,5 +31,20 @@ class ThinkingServiceImplTest {
         for(ThinkingDTO dto : list) {
             log.info(dto);
         }
+    }
+
+    @Test
+    @DisplayName("createThinking service test")
+    void create(){
+        log.info("createThinking service test");
+        ThinkingCreateDTO dto = ThinkingCreateDTO.builder()
+                .category("LEARNED")
+                .title("배운 것")
+                .content("Spring Service에 대해")
+                .password("1234")
+                .build();
+
+        service.create(dto);
+        log.info(dto);
     }
 }
