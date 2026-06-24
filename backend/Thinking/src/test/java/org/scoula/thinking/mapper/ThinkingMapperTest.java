@@ -32,17 +32,18 @@ class ThinkingMapperTest {
         }
     }
 
+    @Test
+    @DisplayName("Thinking mapper update")
     public void update(){
-        ThinkingVO Thinking = new ThinkingVO();
+        ThinkingVO thinking = new ThinkingVO();
         //수정사항들 적기
-//        Thinking.setNo(5L);
-        Thinking.setTitle("수정된 제목");
-        Thinking.setContent("수정된 내용");
-//        Thinking.setWriter("user00");
+        thinking.setId(1L);
+        thinking.setCategory("LEARNED");
+        thinking.setTitle("수정된 제목");
+        thinking.setContent("수정된 내용");
 
-
-        int count = mapper.update(Thinking);
-        log.info("Update count : {}", count);
+        int count = mapper.update(thinking);
+        log.info("Update count : " + count);
     }
 
 }

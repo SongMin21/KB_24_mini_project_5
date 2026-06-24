@@ -6,16 +6,11 @@
 <mapper namespace="org.scoula.thinking.mapper.ThinkingMapper">
     <update id="update">
         update thinking_tbl set
-        id = #{id},
         category = #{category},
         title = #{title},
         content = #{content},
-        password = #{password},
-        like_count = #{likeCount},
-        created_at = #{createdAt},
-        updated_at = #{updatedAt}
-        where no = #{no}
-
+        updated_at = now()
+        where id = #{id}
     </update>
 
 <!--    <delete id="delete">-->
