@@ -7,4 +7,8 @@
     <select id="getList" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT * FROM thinking_tbl
     </select>
+
+    <select id="get" resultType="org.scoula.thinking.domain.ThinkingVO">
+        SELECT * FROM thinking_tbl where id = #{id}
+    </select>
 </mapper>

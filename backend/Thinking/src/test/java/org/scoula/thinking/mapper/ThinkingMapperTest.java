@@ -31,4 +31,9 @@ class ThinkingMapperTest {
             System.out.println(vo);
         }
     }
+
+    public  void getbyCategory(){
+        log.info("get-by-Category test");
+        //여기서 어떻게 짜야하지...?
+    }
 }
