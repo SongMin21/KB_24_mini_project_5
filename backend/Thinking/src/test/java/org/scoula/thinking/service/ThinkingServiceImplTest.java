@@ -31,4 +31,11 @@ class ThinkingServiceImplTest {
             log.info(dto);
         }
     }
+
+    @Test
+    @DisplayName("getThinkingOne service test")
+    void getListOne(){
+        log.info("getThinkingOne service test");
+        log.info(service.getListOne(1L));
+    }
 }
