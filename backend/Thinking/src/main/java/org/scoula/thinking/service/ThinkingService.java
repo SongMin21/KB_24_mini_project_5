@@ -15,4 +15,5 @@ public interface ThinkingService {
     // 이현서
 
     // 이현주
+    public ThinkingDTO getListOne(Long id);
 }

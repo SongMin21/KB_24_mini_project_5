@@ -34,4 +34,11 @@ public class ThinkingServiceImpl implements ThinkingService{
     // 이현서
 
     // 이현주
+
+    @Override
+    public ThinkingDTO getListOne(Long id) {
+        log.info("get......" + id);
+        ThinkingDTO dto = ThinkingDTO.of(mapper.getListOne(id));
+        return dto;
+    }
 }
