@@ -8,6 +8,14 @@
         delete from thinking_tbl
                where id = #{id}
     </delete>
+    <update id="update">
+        update thinking_tbl set
+        category = #{category},
+        title = #{title},
+        content = #{content},
+        updated_at = now()
+        where id = #{id}
+    </update>
     <insert id="create">
         INSERT INTO thinking_tbl (category, title, content, password)
         VALUES (#{category}, #{title}, #{content}, #{password})
@@ -46,5 +54,9 @@
 
     <select id="getByLike" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT * FROM thinking_tbl ORDER BY like_count DESC;
+    </select>
+
+    <select id="getByCategory" resultType="org.scoula.thinking.domain.ThinkingVO">
+        SELECT * FROM thinking_tbl where category = #{category}
     </select>
 </mapper>

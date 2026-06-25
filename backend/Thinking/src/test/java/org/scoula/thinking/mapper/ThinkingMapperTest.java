@@ -36,6 +36,43 @@ class ThinkingMapperTest {
     }
 
     @Test
+    @DisplayName("Thinking mapper update")
+    public void update(){
+        ThinkingVO thinking = new ThinkingVO();
+        //수정사항들 적기
+        thinking.setId(1L);
+        thinking.setCategory("LEARNED");
+        thinking.setTitle("수정된 제목");
+        thinking.setContent("수정된 내용");
+
+        int count = mapper.update(thinking);
+        log.info("Update count : " + count);
+    }
+
+    @Test
+    @DisplayName("Thinking mapper getByCategory")
+    public  void getByCategory(){
+        log.info("get-by-Category test");
+
+        // Learned , Lacked , Good
+        String category = "LEARNED";
+
+        // mapper 호출
+        List<ThinkingVO> list = mapper.getByCategory(category);
+
+        //검증
+        assertNotNull(list);
+        assertFalse(list.isEmpty());
+
+        //조회된 결과물 콘솔 확인
+        for(ThinkingVO vo : list){
+            log.info(vo);
+        }
+
+
+    }
+  
+    @Test
     @DisplayName("Thinking mapper create")
     public void create() {
         ThinkingVO thinking = new ThinkingVO();
