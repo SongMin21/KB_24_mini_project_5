@@ -1,5 +1,9 @@
 package org.scoula.comment.service;
 
+import org.scoula.comment.dto.CommentDTO;
+
+import java.util.List;
+
 public interface CommentService {
     // 강민주
 
@@ -8,4 +12,5 @@ public interface CommentService {
     // 이현서
 
     // 이현주
+    public List<CommentDTO> selectComment(long thinkingId);
 }
