@@ -35,7 +35,7 @@
             created_at,
             updated_at
         FROM comment_tbl
-        WHERE thinking_id = #{thinking_id}
+        WHERE thinking_id = #{thinkingId}
         ORDER BY created_at ASC
     </select>
 
