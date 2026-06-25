@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +31,7 @@ class ThinkingMapperTest {
         log.info("getList test");
         List<ThinkingVO> list = mapper.getList();
         for(ThinkingVO vo : list) {
-            System.out.println(vo);
+            log.info(vo);
         }
     }
 
@@ -46,4 +49,87 @@ class ThinkingMapperTest {
         log.info("Update count : " + count);
     }
 
+    @Test
+    @DisplayName("Thinking mapper getByCategory")
+    public  void getByCategory(){
+        log.info("get-by-Category test");
+
+        // Learned , Lacked , Good
+        String category = "LEARNED";
+
+        // mapper 호출
+        List<ThinkingVO> list = mapper.getByCategory(category);
+
+        //검증
+        assertNotNull(list);
+        assertFalse(list.isEmpty());
+
+        //조회된 결과물 콘솔 확인
+        for(ThinkingVO vo : list){
+            log.info(vo);
+        }
+
+
+    }
+  
+    @Test
+    @DisplayName("Thinking mapper create")
+    public void create() {
+        ThinkingVO thinking = new ThinkingVO();
+        thinking.setCategory("LEARNED");
+        thinking.setTitle("새로 작성하는 제목");
+        thinking.setContent("새로 작성하는 내용");
+        thinking.setPassword("1234");
+        mapper.create(thinking);
+    }
+
+    @Test
+    @DisplayName("Thinking mapper updateLike")
+    public void updateLike() {
+        log.info("update like");
+        int cnt = mapper.updateLike(3L);
+        log.info("update : " + cnt);
+    }
+
+    @Test
+    @DisplayName("Thinking mapper getByDate")
+    public void getByDate() {
+        log.info("getByDate test");
+        LocalDate localDate = LocalDate.of(2026, 6, 1);
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        List<ThinkingVO> list = mapper.getByDate(date);
+        assertNotNull(list);
+        assertFalse(list.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Thinking mapper getByLike(Desc)")
+    public void getByLike() {
+        log.info("getByLike test");
+
+        // 매퍼를 통해 좋아요 내림차순 정렬 리스트 가져오기
+        List<ThinkingVO> list = mapper.getByLike();
+        // 결과 검증 - 리스트가 비어있지 않은지 확인
+        assertNotNull(list);
+        assertFalse(list.isEmpty());
+
+    }
+
+
+    @Test
+    @DisplayName("Thinking mapper getPassword")
+    public void getPassword() {
+        log.info("getPassword Test");
+        String password = mapper.getPassword(1L);
+        log.info("password : " + password);
+    }
+
+    @Test
+    @DisplayName("Thinking mapper getListOne")
+    public void getListOne(){
+        log.info("getListOne test");
+        ThinkingVO thinking = mapper.getListOne(1L);
+        log.info(thinking);
+    }
 }
