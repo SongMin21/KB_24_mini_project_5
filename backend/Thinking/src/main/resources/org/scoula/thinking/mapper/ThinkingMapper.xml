@@ -43,4 +43,8 @@
     <select id="getByLike" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT * FROM thinking_tbl ORDER BY like_count DESC;
     </select>
+
+    <select id="getByCategory" resultType="org.scoula.thinking.domain.ThinkingVO">
+        SELECT * FROM thinking_tbl where category = #{category}
+    </select>
 </mapper>
