@@ -32,8 +32,26 @@ class ThinkingMapperTest {
         }
     }
 
-    public  void getbyCategory(){
+    @Test
+    @DisplayName("Thinking mapper getByCategory")
+    public  void getByCategory(){
         log.info("get-by-Category test");
-        //여기서 어떻게 짜야하지...?
+
+        // Learnd , Lacked , Good
+        String category = "Learnd";
+
+        // mapper 호출
+        List<ThinkingVO> list = mapper.getByCategory(category);
+
+        //검증
+        assertNotNull(list);
+        assertFalse(list.isEmpty());
+
+        //조회된 결과물 콘솔 확인
+        for(ThinkingVO vo : list){
+            log.info(vo);
+        }
+
+
     }
 }

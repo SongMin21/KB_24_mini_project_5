@@ -9,6 +9,11 @@
     </select>
 
     <select id="get" resultType="org.scoula.thinking.domain.ThinkingVO">
-        SELECT * FROM thinking_tbl where id = #{id}
+        SELECT * FROM thinking_tbl where category = #{category}
+    </select>
+
+    <select id="getByCategory" resultType="org.scoula.thinking.domain.ThinkingVO">
+
+
     </select>
 </mapper>

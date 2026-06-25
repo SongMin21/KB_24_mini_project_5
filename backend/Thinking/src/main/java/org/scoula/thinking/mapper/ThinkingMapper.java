@@ -7,5 +7,7 @@ import java.util.List;
 public interface ThinkingMapper {
     public List<ThinkingVO> getList();
 
-    public ThinkingVO get(Long id);
+//    public List<ThinkingVO> get(String category);
+
+    public List<ThinkingVO> getByCategory(String category);
 }
