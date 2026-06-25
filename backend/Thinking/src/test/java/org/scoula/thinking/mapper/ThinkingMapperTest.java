@@ -37,8 +37,8 @@ class ThinkingMapperTest {
     public  void getByCategory(){
         log.info("get-by-Category test");
 
-        // Learnd , Lacked , Good
-        String category = "Learnd";
+        // Learned , Lacked , Good
+        String category = "LEARNED";
 
         // mapper 호출
         List<ThinkingVO> list = mapper.getByCategory(category);
