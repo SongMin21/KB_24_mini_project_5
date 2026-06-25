@@ -1,7 +1,5 @@
 package org.scoula.comment.dto;
 
-
-
 import lombok.AllArgsConstructor;
 
 import lombok.Builder;
@@ -16,14 +14,9 @@ import org.scoula.comment.domain.CommentVO;
 
 import java.util.Date;
 
-
-
 @Data
-
 @NoArgsConstructor
-
 @AllArgsConstructor
-
 @Builder
 
 public class CommentUpdateDTO {

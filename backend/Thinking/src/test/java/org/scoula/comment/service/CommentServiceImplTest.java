@@ -20,10 +20,14 @@ class CommentServiceImplTest {
     @Autowired
     private CommentService service;
     @Test
-    void update() {
+    void updateComment() {
         // impl클래스 내에 get 메서드 선언 필요
-        CommentUpdateDTO comment = service.get(1L);
-        comment.setContent("내용 수정함");
-        log.info("update : " + service.update(comment));
+        CommentUpdateDTO comment = CommentUpdateDTO.builder()
+                .id(1L)
+                .content("댓글 내용 수정(service)")
+                .password("c123")
+                .build();
+
+        log.info("update 결과 : " + service.updateComment(comment));
     }
 }
