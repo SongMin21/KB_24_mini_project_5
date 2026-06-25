@@ -25,6 +25,7 @@ class ThinkingServiceImplTest {
     @Autowired
     private ThinkingService service;
 
+    // 전체
     @Test
     @DisplayName("getThinking service test")
     void getThinking() {
@@ -35,6 +36,7 @@ class ThinkingServiceImplTest {
         }
     }
 
+    // 강민주
     @Test
     void getByDate() {
         log.info("getByDate service test");
