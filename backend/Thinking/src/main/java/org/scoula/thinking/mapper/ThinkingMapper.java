@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface ThinkingMapper {
     public List<ThinkingVO> getList();
+    public List<ThinkingVO> getByCategory(String category);
     public void create(ThinkingVO thinking);
     public ThinkingVO getListOne(
             @Param("id") long id
     );
     public int updateLike(long id);
     public List<ThinkingVO> getByDate(Date date);
-
     public List<ThinkingVO> getByLike();
     // get password
     public String getPassword(long id);
