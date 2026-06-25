@@ -2,6 +2,7 @@ package org.scoula.thinking.service;
 
 import org.scoula.thinking.dto.ThinkingDTO;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ThinkingService {
@@ -9,7 +10,7 @@ public interface ThinkingService {
     public List<ThinkingDTO> getThinking();
 
     // 강민주
-
+    public List<ThinkingDTO> getByDate(Date date);
     // 복원준
 
     // 이현서
