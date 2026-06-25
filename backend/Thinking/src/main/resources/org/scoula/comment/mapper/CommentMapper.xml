@@ -15,7 +15,7 @@
         UPDATE comment_tbl
         SET content = #{content}
         WHERE id = #{id}
-            AND password = #{password}
+--             AND password = #{password}
     </update>
     <select id="getPassword" resultType="java.lang.String">
         SELECT password

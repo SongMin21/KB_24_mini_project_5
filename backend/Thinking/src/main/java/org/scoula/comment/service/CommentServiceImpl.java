@@ -2,6 +2,7 @@ package org.scoula.comment.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.scoula.comment.dto.CommentDeleteDTO;
 import org.scoula.comment.dto.CommentUpdateDTO;
 import org.scoula.comment.mapper.CommentMapper;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,24 @@ public class CommentServiceImpl implements CommentService{
         return mapper.updateComment(comment.toVo()) == 1;
     }
 
+    @Override
+    public boolean deleteComment(CommentDeleteDTO comment) {
+        log.info("delete : " + comment);
+
+        String realPassword = mapper.getPassword(comment.getId());
+
+        if (realPassword == null) {
+            log.warn("[Comment Delete Fail] 댓글 없음 - 요청된 ID: {}", comment.getId());
+            throw new IllegalArgumentException("존재하지 않거나 이미 삭제된 댓글입니다.");
+        }
+
+        if (!realPassword.equals(comment.getPassword())) {
+            log.warn("[Comment Delete Fail] 비밀번호 불일치 - 요청된 ID: {}", comment.getId());
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        log.info("[Comment Delete Success] 댓글 삭제 완료 - ID: {}", comment.getId());
+        return mapper.deleteComment(comment.toVo()) == 1;
+    }
     // 이현주
 }
