@@ -8,7 +8,7 @@ CREATE TABLE thinking_tbl
     password   VARCHAR(255) NOT NULL,
     like_count INT          NOT NULL DEFAULT 0,
     created_at DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO thinking_tbl (category, title, content, password, like_count, created_at)
