@@ -102,6 +102,11 @@ class ThinkingMapperTest {
         assertNotNull(list);
         assertFalse(list.isEmpty());
     }
+    @Test
+    @DisplayName("Thinking mapper delete")
+    public void delete() {
+        log.info("Delete Count : " + mapper.delete(3L));
+    }
 
     @Test
     @DisplayName("Thinking mapper getByLike(Desc)")
