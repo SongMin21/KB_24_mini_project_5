@@ -31,7 +31,19 @@ public class ThinkingServiceImpl implements ThinkingService{
 
     // 복원준
 
-    // 이현서
+    @Override
+    public boolean deleteThinking(long id) {
 
+        // id == 음수이면 안됨.
+
+        if(id <= 0){
+            log.warn("delete service 실패");
+            throw new IllegalArgumentException("내용은 필수입니다.");
+        }
+        return mapper.delete(id) == 1;
+    }
+
+
+    // 이현서
     // 이현주
 }
