@@ -29,6 +29,16 @@ public class ThinkingServiceImpl implements ThinkingService{
 
     // 강민주
 
+    // update like(like +1)
+    @Override
+    public boolean updateLike(long id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("유효하지 않은 ID입니다.");
+        }
+        int count = mapper.updateLike(id);
+        return count == 1;
+    }
+
     // 복원준
 
     // 이현서
