@@ -33,7 +33,17 @@ public class ThinkingServiceImpl implements ThinkingService{
     // 이현서
     @Override
     public List<ThinkingDTO> getByLike() {
-        return List.of();
+        //  mapper vo 가져오기
+        List<ThinkingVO> vo = mapper.getByLike();
+
+        // 기존 vo를 dto로 변환
+        List<ThinkingDTO> dto = vo.stream()
+                // 좋아요 1개 이상인 글만 조회
+                .filter(voList -> voList.getLikeCount() > 0)
+                .map(ThinkingDTO::of)
+                .toList();
+
+        return dto;
     }
 
 
