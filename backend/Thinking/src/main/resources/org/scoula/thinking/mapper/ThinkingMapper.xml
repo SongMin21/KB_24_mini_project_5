@@ -15,6 +15,7 @@
     <select id="getList" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT *
         FROM thinking_tbl
+        ORDER BY created_at DESC
     </select>
 
     <update id="updateLike">
@@ -41,6 +42,8 @@
     </select>
 
     <select id="getByLike" resultType="org.scoula.thinking.domain.ThinkingVO">
-        SELECT * FROM thinking_tbl ORDER BY like_count DESC;
+        SELECT *
+        FROM thinking_tbl
+        ORDER BY like_count DESC, created_at DESC
     </select>
 </mapper>

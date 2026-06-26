@@ -31,4 +31,14 @@ class ThinkingServiceImplTest {
             log.info(dto);
         }
     }
+
+    @Test
+    @DisplayName("getByLike service test")
+    void getByLike(){
+        log.info("getByLike service test");
+        List<ThinkingDTO> list = service.getByLike();
+        for(ThinkingDTO dto : list){
+            log.info(dto);
+        }
+    }
 }
