@@ -36,7 +36,7 @@ class CommentServiceImplTest {
     @Test
     void deleteComment() {
         CommentDeleteDTO comment = CommentDeleteDTO.builder()
-                .id(16L)
+                .id(18L)
                 .password("password")
                 .build();
 //        CommentDeleteDTO comment = CommentDeleteDTO.builder()
