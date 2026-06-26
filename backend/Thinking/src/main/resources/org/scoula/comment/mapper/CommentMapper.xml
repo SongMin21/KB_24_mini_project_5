@@ -25,7 +25,6 @@
     <delete id="deleteComment">
         DELETE FROM comment_tbl
         WHERE id = #{id}
-             AND password = #{password}/**/
             <!-- AND password = #{password} -->
     </delete>
     <select id="selectComment" resultType="org.scoula.comment.domain.CommentVO">
