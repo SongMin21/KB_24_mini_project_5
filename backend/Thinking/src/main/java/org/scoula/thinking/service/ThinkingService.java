@@ -13,6 +13,6 @@ public interface ThinkingService {
     // 복원준
 
     // 이현서
-
+    public List<ThinkingDTO> getByLike();
     // 이현주
 }
