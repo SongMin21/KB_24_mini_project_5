@@ -26,12 +26,16 @@ public class ThinkingServiceImpl implements ThinkingService{
         return dto;
     }
 
-
     // 강민주
 
     // 복원준
 
     // 이현서
+    @Override
+    public List<ThinkingDTO> getByLike() {
+        return List.of();
+    }
+
 
     // 이현주
 }
