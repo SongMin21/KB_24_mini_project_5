@@ -31,4 +31,11 @@ class ThinkingServiceImplTest {
             log.info(dto);
         }
     }
+
+    @Test
+    void deleteThinking() {
+        log.info("deleteThinking test");
+        log.info(service.deleteThinking(2L));
+
+    }
 }

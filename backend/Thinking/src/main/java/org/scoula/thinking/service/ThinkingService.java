@@ -11,7 +11,7 @@ public interface ThinkingService {
     // 강민주
 
     // 복원준
-
+    public boolean deleteThinking(long id);
     // 이현서
 
     // 이현주
