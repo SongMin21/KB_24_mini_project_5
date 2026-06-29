@@ -15,7 +15,8 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = {
         "org.scoula.exception",
         "org.scoula.controller",
-        "org.scoula.thinking.controller"
+        "org.scoula.thinking.controller",
+        "org.scoula.comment.controller"
 })
 public class ServletConfig implements WebMvcConfigurer {
     @Override
