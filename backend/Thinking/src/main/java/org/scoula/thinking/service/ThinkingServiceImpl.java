@@ -30,7 +30,20 @@ public class ThinkingServiceImpl implements ThinkingService{
     // 강민주
 
     // 복원준
+    //카테고리별 조회 구현
+    @Override
+    public List<ThinkingDTO> getByCategory(String category){
+        log.info("service getByCategory ---------" + category);
 
+        // Mapper 호출하여 DB에서 특정 카테고리에 해당하는 VO 리스트 가져오기
+        List<ThinkingVO> voList = mapper.getByCategory(category);
+
+        // 받아온 VO 리스트를 DTO 리스트로 변환
+        List<ThinkingDTO> dtoList = voList.stream().map(ThinkingDTO::of).toList();
+
+        // 변환된 DTO 리스트 반환
+        return dtoList;
+    }
     // 이현서
 
     // 이현주
