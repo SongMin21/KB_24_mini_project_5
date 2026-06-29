@@ -1,6 +1,7 @@
 package org.scoula.thinking.controller;
 
 import lombok.extern.log4j.Log4j2;
+import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
 import org.scoula.thinking.service.ThinkingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,8 @@ public class ThinkingController {
     // 이현서
 
     // 이현주
+    @PostMapping("")
+    public ResponseEntity<ThinkingDTO> create(@RequestBody ThinkingCreateDTO thinking){
+        return ResponseEntity.ok(service.create(thinking));
+    }
 }
