@@ -38,5 +38,7 @@
         WHERE thinking_id = #{thinkingId}
         ORDER BY created_at ASC
     </select>
-
+    <select id="get" resultType="org.scoula.comment.domain.CommentVO">
+        SELECT * FROM comment_tbl where id = #{id}
+    </select>
 </mapper>

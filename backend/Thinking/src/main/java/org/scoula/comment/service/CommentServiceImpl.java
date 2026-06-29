@@ -21,7 +21,7 @@ public class CommentServiceImpl implements CommentService{
 
     // 강민주
     @Override
-    public void create(CommentCreateDTO dto) {
+    public CommentDTO create(CommentCreateDTO dto) {
         log.info("create service");
         // dto의 내용 vo로 변경하여 create 호출
         if (dto == null ||
@@ -31,7 +31,17 @@ public class CommentServiceImpl implements CommentService{
             log.warn("create service 실패");
             throw new IllegalArgumentException("내용은 필수입니다.");
         }
-        mapper.create(dto.toVO());
+        CommentVO vo = dto.toVO();
+        mapper.create(vo);
+        return get(vo.getId());
+    }
+
+    public CommentDTO get(long id) {
+        if(id <= 0) {
+            throw new IllegalArgumentException("id 값이 음수입니다.");
+        }
+        CommentDTO dto = CommentDTO.of(mapper.get(id));
+        return dto;
     }
 
     // 복원준
@@ -39,34 +49,34 @@ public class CommentServiceImpl implements CommentService{
     // 이현서 : 수정/삭제
     @Override
 //    public boolean updateComment(CommentUpdateDTO comment) {
-    public CommentUpdateDTO updateComment(CommentUpdateDTO comment) {
-        log.info("update : " + comment);
+    public CommentDTO updateComment(CommentUpdateDTO dto) {
+        log.info("update : " + dto);
 
         // 1. 매퍼를 통해 DB의 비번 꺼내옴
-        String realPassword = mapper.getPassword(comment.getId());
+        String realPassword = mapper.getPassword(dto.getId());
 
         // 2. 비밀번호 검사
          // a. DB 비번이 null일 때
         if (realPassword == null) {
-            log.warn("[Comment Update Fail] 댓글 없음 - 요청된 ID: {}", comment.getId());
+            log.warn("update comment 실패 : 존재하지 않거나 이미 삭제된 댓글");
 
             // 유효하지 않은 인자값 예외
             throw new IllegalArgumentException("존재하지 않거나 이미 삭제된 댓글입니다.");
         }
 
          // b. 사용자 입력 비번과 DB 비번 불일치
-        if (!realPassword.equals(comment.getPassword())) {
-            log.warn("[Comment Update Fail] 비밀번호 불일치 - 요청된 ID: {}", comment.getId());
+        if (!realPassword.equals(dto.getPassword())) {
+            log.warn("update comment 실패 : 비밀번호 불일치");
 
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         // 3. 비밀번호 일치할 때만 매퍼 가동시켜서 수정 처리
-        mapper.updateComment(comment.toVo());
-        log.info("[Comment Update Success] 댓글 수정 완료 - ID: {}", comment.getId());
+        mapper.updateComment(dto.toVo());
+        log.info("update comment 완료");
 
         // return mapper.updateComment(comment.toVo()) == 1;
         // dto를 return
-        return comment;
+        return get(dto.getId());
     }
 
     @Override
@@ -90,6 +100,7 @@ public class CommentServiceImpl implements CommentService{
 
         return comment;
     }
+
     // 이현주
     @Override
     public List<CommentDTO> selectComment(long thinkingId) {
