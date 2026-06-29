@@ -1,5 +1,6 @@
 package org.scoula.comment.service;
 
+import org.scoula.comment.dto.CommentUpdateDTO;
 import org.scoula.comment.dto.CommentDTO;
 import org.scoula.comment.dto.CommentCreateDTO;
 import java.util.List;
@@ -10,7 +11,9 @@ public interface CommentService {
 
     // 복원준
 
-    // 이현서
+    // 이현서 : 수정/삭제
+    public boolean updateComment(CommentUpdateDTO comment);
+
 
     // 이현주
     public List<CommentDTO> selectComment(long thinkingId);
