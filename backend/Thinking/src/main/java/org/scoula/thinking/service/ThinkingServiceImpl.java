@@ -52,12 +52,12 @@ public class ThinkingServiceImpl implements ThinkingService{
 
     // update like(like +1)
     @Override
-    public boolean updateLike(long id) {
+    public ThinkingDTO updateLike(long id) {
         if (id <= 0) {
             throw new IllegalArgumentException("유효하지 않은 ID입니다.");
         }
-        int count = mapper.updateLike(id);
-        return count == 1;
+        mapper.updateLike(id);
+        return getListOne(id);
     }
 
     // 복원준
