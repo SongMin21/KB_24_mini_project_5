@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.scoula.comment.dto.CommentDeleteDTO;
 import org.scoula.comment.dto.CommentUpdateDTO;
 import org.scoula.comment.dto.CommentCreateDTO;
 import org.scoula.comment.dto.CommentDTO;
@@ -11,9 +12,7 @@ import org.scoula.config.RootConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -52,7 +51,7 @@ class CommentServiceImplTest {
         service.create(dto);
         log.info("comment create service");
     }
-  
+
     // 이현서
     @Test
     void updateComment() {
@@ -64,5 +63,22 @@ class CommentServiceImplTest {
                 .build();
 
         log.info("update 결과 : " + service.updateComment(comment));
+    }
+
+    @Test
+    void deleteComment() {
+        CommentDeleteDTO comment = CommentDeleteDTO.builder()
+                .id(18L)
+                .password("password")
+                .build();
+//        CommentDeleteDTO comment = CommentDeleteDTO.builder()
+//                .id(1L)
+//                .password("c123")
+//                .build();
+
+        log.info("delete 결과: " + service.deleteComment(comment));
+//        boolean result = service.deleteComment(comment);
+//        log.info("delete 결과 : " + result);
+//        assertTrue(result);
     }
 }
