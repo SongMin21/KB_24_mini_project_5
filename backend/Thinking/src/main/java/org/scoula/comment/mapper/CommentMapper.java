@@ -22,4 +22,7 @@ public interface CommentMapper {
 
     // delete comment
     public int deleteComment(CommentVO comment);
+
+    // get comment
+    public CommentVO get(long id);
 }
