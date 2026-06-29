@@ -37,6 +37,17 @@ class ThinkingServiceImplTest {
         }
     }
 
+    // 이현서
+    @Test
+    @DisplayName("getByLike service test")
+    void getByLike(){
+        log.info("getByLike service test");
+        List<ThinkingDTO> list = service.getByLike();
+        for(ThinkingDTO dto : list){
+            log.info(dto);
+        }
+    }
+  
     // 이현주
     @Test
     @DisplayName("getThinkingOne service test")
