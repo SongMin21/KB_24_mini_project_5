@@ -1,5 +1,6 @@
 package org.scoula.thinking.service;
 
+import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
 
 import java.util.Date;
@@ -18,4 +19,5 @@ public interface ThinkingService {
 
     // 이현주
     public ThinkingDTO getListOne(Long id);
+    public void create(ThinkingCreateDTO thinking);
 }
