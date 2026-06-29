@@ -2,6 +2,7 @@ package org.scoula.comment.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.scoula.comment.domain.CommentVO;
 import org.scoula.comment.dto.CommentDeleteDTO;
 import org.scoula.comment.dto.CommentUpdateDTO;
 import org.scoula.comment.dto.CommentDTO;
@@ -9,6 +10,7 @@ import org.scoula.comment.dto.CommentCreateDTO;
 import org.scoula.comment.mapper.CommentMapper;
 import org.springframework.stereotype.Service;
 
+import javax.xml.stream.events.Comment;
 import java.util.List;
 
 @Log4j2
@@ -36,7 +38,8 @@ public class CommentServiceImpl implements CommentService{
 
     // 이현서 : 수정/삭제
     @Override
-    public boolean updateComment(CommentUpdateDTO comment) {
+//    public boolean updateComment(CommentUpdateDTO comment) {
+    public CommentUpdateDTO updateComment(CommentUpdateDTO comment) {
         log.info("update : " + comment);
 
         // 1. 매퍼를 통해 DB의 비번 꺼내옴
@@ -58,12 +61,16 @@ public class CommentServiceImpl implements CommentService{
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         // 3. 비밀번호 일치할 때만 매퍼 가동시켜서 수정 처리
+        mapper.updateComment(comment.toVo());
         log.info("[Comment Update Success] 댓글 수정 완료 - ID: {}", comment.getId());
-        return mapper.updateComment(comment.toVo()) == 1;
+
+        // return mapper.updateComment(comment.toVo()) == 1;
+        // dto를 return
+        return comment;
     }
 
     @Override
-    public boolean deleteComment(CommentDeleteDTO comment) {
+    public CommentDeleteDTO deleteComment(CommentDeleteDTO comment) {
         log.info("delete : " + comment);
 
         String realPassword = mapper.getPassword(comment.getId());
@@ -78,8 +85,10 @@ public class CommentServiceImpl implements CommentService{
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
+        mapper.deleteComment(comment.toVo());
         log.info("[Comment Delete Success] 댓글 삭제 완료 - ID: {}", comment.getId());
-        return mapper.deleteComment(comment.toVo()) == 1;
+
+        return comment;
     }
     // 이현주
     @Override
