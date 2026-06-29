@@ -41,4 +41,8 @@ public class ThinkingController {
     // 이현서
 
     // 이현주
+    @GetMapping("/{id}")
+    public ResponseEntity<ThinkingDTO> getListOne(@PathVariable Long id){
+        return ResponseEntity.ok(service.getListOne(id));
+    }
 }
