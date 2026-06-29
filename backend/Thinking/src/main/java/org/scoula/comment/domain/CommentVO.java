@@ -11,7 +11,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class CommentVO {
     private long id;
     private long thinkingId;
