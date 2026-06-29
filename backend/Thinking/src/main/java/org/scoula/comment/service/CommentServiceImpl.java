@@ -80,25 +80,25 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public CommentDeleteDTO deleteComment(CommentDeleteDTO comment) {
-        log.info("delete : " + comment);
+    public Long deleteComment(CommentDeleteDTO dto) {
+        log.info("delete : " + dto);
 
-        String realPassword = mapper.getPassword(comment.getId());
+        String realPassword = mapper.getPassword(dto.getId());
 
         if (realPassword == null) {
-            log.warn("[Comment Delete Fail] 댓글 없음 - 요청된 ID: {}", comment.getId());
+            log.warn("delete comment 실패 : 존재하지 않거나 이미 삭제된 댓글");
             throw new IllegalArgumentException("존재하지 않거나 이미 삭제된 댓글입니다.");
         }
 
-        if (!realPassword.equals(comment.getPassword())) {
-            log.warn("[Comment Delete Fail] 비밀번호 불일치 - 요청된 ID: {}", comment.getId());
+        if (!realPassword.equals(dto.getPassword())) {
+            log.warn("delete comment 실패 : 비밀번호 불일치");
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
-        mapper.deleteComment(comment.toVo());
-        log.info("[Comment Delete Success] 댓글 삭제 완료 - ID: {}", comment.getId());
+        mapper.deleteComment(dto.toVo());
+        log.info("[Comment Delete Success] 댓글 삭제 완료 - ID: {}", dto.getId());
 
-        return comment;
+        return dto.getId();
     }
 
     // 이현주
