@@ -2,7 +2,6 @@ package org.scoula.comment.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.scoula.comment.domain.CommentVO;
-import org.scoula.thinking.domain.ThinkingVO;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ public interface CommentMapper {
     public int updateComment(CommentVO comment);
 
     public List<CommentVO> selectComment(
-            @Param("thinking_id") Long thinking_id
+            @Param("thinkingId") Long thinkingId
     );
 
     // create comment
