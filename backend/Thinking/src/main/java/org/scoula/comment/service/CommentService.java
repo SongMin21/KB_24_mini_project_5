@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface CommentService {
     // 강민주
-    public void create(CommentCreateDTO dto);
+    public CommentDTO create(CommentCreateDTO dto);
+    public CommentDTO get(long id);
 
     // 복원준
 

@@ -2,6 +2,7 @@ package org.scoula.comment.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.scoula.comment.domain.CommentVO;
 import org.scoula.comment.dto.CommentDeleteDTO;
 import org.scoula.comment.dto.CommentUpdateDTO;
 import org.scoula.comment.dto.CommentDTO;
@@ -19,7 +20,7 @@ public class CommentServiceImpl implements CommentService{
 
     // 강민주
     @Override
-    public void create(CommentCreateDTO dto) {
+    public CommentDTO create(CommentCreateDTO dto) {
         log.info("create service");
         // dto의 내용 vo로 변경하여 create 호출
         if (dto == null ||
@@ -29,7 +30,17 @@ public class CommentServiceImpl implements CommentService{
             log.warn("create service 실패");
             throw new IllegalArgumentException("내용은 필수입니다.");
         }
-        mapper.create(dto.toVO());
+        CommentVO vo = dto.toVO();
+        mapper.create(vo);
+        return get(vo.getId());
+    }
+
+    public CommentDTO get(long id) {
+        if(id <= 0) {
+            throw new IllegalArgumentException("id 값이 음수입니다.");
+        }
+        CommentDTO dto = CommentDTO.of(mapper.get(id));
+        return dto;
     }
 
     // 복원준
@@ -81,6 +92,7 @@ public class CommentServiceImpl implements CommentService{
         log.info("[Comment Delete Success] 댓글 삭제 완료 - ID: {}", comment.getId());
         return mapper.deleteComment(comment.toVo()) == 1;
     }
+
     // 이현주
     @Override
     public List<CommentDTO> selectComment(long thinkingId) {
