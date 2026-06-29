@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.scoula.config.RootConfig;
 import org.scoula.thinking.dto.ThinkingDTO;
+import org.scoula.thinking.dto.ThinkingDeleteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -35,7 +36,11 @@ class ThinkingServiceImplTest {
     @Test
     void deleteThinking() {
         log.info("deleteThinking test");
-        log.info(service.deleteThinking(2L));
+        ThinkingDeleteDTO thinking = ThinkingDeleteDTO.builder()
+                .id(5L)
+                .password("9999")
+                .build();
+        log.info(service.deleteThinking(thinking));
 
     }
 }
