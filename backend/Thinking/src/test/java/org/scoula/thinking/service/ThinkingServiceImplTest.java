@@ -32,7 +32,8 @@ class ThinkingServiceImplTest {
         }
     }
 
-    void getByCatogory(){
+    @Test
+    void getByCategory(){
         log.info("getBycategory service test 시작");
 
         //검증하고 싶은 카테고리 지정
@@ -42,7 +43,7 @@ class ThinkingServiceImplTest {
         List<ThinkingDTO> list = service.getByCategory(targetCategory);
 
         //결과 출력
-        for(ThinkingDto dto : list){
+        for(ThinkingDTO dto : list){
             log.info(dto);
         }
     }
