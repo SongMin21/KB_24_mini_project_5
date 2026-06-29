@@ -36,8 +36,10 @@ class ThinkingServiceImplTest {
         }
     }
 
+    
     // 강민주
     @Test
+    @DisplayName("getByDate service test")
     void getByDate() {
         log.info("getByDate service test");
         // 형식에 맞게 date 선언
@@ -48,5 +50,12 @@ class ThinkingServiceImplTest {
         for(ThinkingDTO dto : list) {
             log.info(dto);
         }
+    }
+  
+    @Test
+    @DisplayName("update like service test")
+    void updateLike() {
+        log.info("update like service test");
+        log.info(service.updateLike(1L));
     }
 }
