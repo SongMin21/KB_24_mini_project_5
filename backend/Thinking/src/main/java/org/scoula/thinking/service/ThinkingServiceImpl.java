@@ -28,7 +28,6 @@ public class ThinkingServiceImpl implements ThinkingService{
         return dto;
     }
 
-
     // 강민주
     @Override
     public List<ThinkingDTO> getByDate(Date date) {
@@ -64,6 +63,21 @@ public class ThinkingServiceImpl implements ThinkingService{
     // 복원준
 
     // 이현서
+    @Override
+    public List<ThinkingDTO> getByLike() {
+        //  mapper vo 가져오기
+        List<ThinkingVO> vo = mapper.getByLike();
+
+        // 기존 vo를 dto로 변환
+        List<ThinkingDTO> dto = vo.stream()
+                // 좋아요 1개 이상인 글만 조회
+                .filter(voList -> voList.getLikeCount() >= 20)
+                .map(ThinkingDTO::of)
+                .toList();
+
+        return dto;
+    }
+
 
     // 이현주
     @Override
