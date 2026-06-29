@@ -3,6 +3,7 @@ package org.scoula.comment.controller;
 import lombok.extern.log4j.Log4j2;
 import org.scoula.comment.dto.CommentCreateDTO;
 import org.scoula.comment.dto.CommentDTO;
+import org.scoula.comment.dto.CommentDeleteDTO;
 import org.scoula.comment.dto.CommentUpdateDTO;
 import org.scoula.comment.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class CommentController {
     // 복원준
 
     // 이현서
+    // 수정
     @PutMapping("/{id}")
     public ResponseEntity<CommentDTO> updateComment(
             @PathVariable Long id,
@@ -35,6 +37,15 @@ public class CommentController {
         CommentDTO comment = service.updateComment(dto);
         return ResponseEntity.ok(comment);
     }
+    // 삭제
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> deleteComment(
+            @PathVariable Long id,
+            @RequestBody CommentDeleteDTO dto){
+        dto.setId(id);
+        Long deletedId = service.deleteComment(dto);
 
+        return ResponseEntity.ok(deletedId);
+    }
     // 이현주
 }
