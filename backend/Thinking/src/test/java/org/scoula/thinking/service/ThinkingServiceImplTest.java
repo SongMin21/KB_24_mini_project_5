@@ -47,21 +47,4 @@ class ThinkingServiceImplTest {
         service.create(dto);
         log.info(dto);
     }
-
-    void createThinking(){
-        log.info("createThinking service test-------");
-
-        //테스트 DTO 생성
-        ThinkingDTO dto = new ThinkingDTO();
-        dto.setCategory("LEARNED");
-        dto.setTitle("Service 계층 학습 완료");
-        dto.setContent("DTO와 VO의 변환과정에 대해 공부하였슴");
-        dto.setPasswrod("1234")
-
-        boolean isCreated = service.createThinking(dto);
-        log.info("게시글 생성 결과 : " + isCreated);
-    }
-
-
-
 }
