@@ -12,6 +12,7 @@ public interface ThinkingService {
 
     // 복원준
 
+    public List<ThinkingDTO> getByCategory(String category);
     // 이현서
 
     // 이현주
