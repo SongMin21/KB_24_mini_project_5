@@ -15,6 +15,7 @@ public interface ThinkingService {
     public boolean updateLike(long id);
     // 복원준
 
+    public List<ThinkingDTO> getByCategory(String category);
     // 이현서
     public List<ThinkingDTO> getByLike();
     // 이현주

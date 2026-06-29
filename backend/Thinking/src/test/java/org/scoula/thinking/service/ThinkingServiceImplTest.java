@@ -92,4 +92,21 @@ class ThinkingServiceImplTest {
         log.info("update like service test");
         log.info(service.updateLike(1L));
     }
+  
+    // 복원준
+    @Test
+    void getByCategory(){
+        log.info("getBycategory service test 시작");
+
+        //검증하고 싶은 카테고리 지정
+        String targetCategory = "LEARNED";
+
+        //Service 메서드 호출
+        List<ThinkingDTO> list = service.getByCategory(targetCategory);
+
+        //결과 출력
+        for(ThinkingDTO dto : list){
+            log.info(dto);
+        }
+    }
 }
