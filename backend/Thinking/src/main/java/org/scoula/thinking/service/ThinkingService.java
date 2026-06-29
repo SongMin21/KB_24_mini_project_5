@@ -12,7 +12,6 @@ public interface ThinkingService {
     // 강민주
 
     // 복원준
-    public boolean createThinking(ThinkingDTO dto);
 
     // 이현서
 

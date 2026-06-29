@@ -32,31 +32,6 @@ public class ThinkingServiceImpl implements ThinkingService{
 
     // 복원준
 
-    public ThinkingVO toVO(){
-        return ThinkingVO.builder()
-                .category(this.category)
-                .title(this.title)
-                .content(this.content)
-                .password(this.password)
-                .build();
-    }
-
-    @Override
-    public boolean createThinking(ThinkingDTO dto){
-        log.info("service createThinking.. " + dto);
-
-        // 필수값 검증 (from 제미나이....)
-         if(dto.getPasswrod() == null || dto.getPassword().trim().isEmpty()){
-             throw new IllegalArgumentException("수정/삭제를 위한 비밀번호가 필요합니다.")
-         }
-
-        // DTO를 VO로 변환
-        ThinkingVO vo =dto.toVO();
-
-        // Mapper 호출 및 결과 반환
-        int result = mapper.create(vo);
-        return result == 1;
-    }
     // 이현서
 
     // 이현주
