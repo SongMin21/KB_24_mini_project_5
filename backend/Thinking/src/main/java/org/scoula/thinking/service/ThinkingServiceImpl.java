@@ -3,6 +3,7 @@ package org.scoula.thinking.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.scoula.thinking.domain.ThinkingVO;
+import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
 import org.scoula.thinking.mapper.ThinkingMapper;
 import org.springframework.stereotype.Service;
@@ -65,11 +66,16 @@ public class ThinkingServiceImpl implements ThinkingService{
     // 이현서
 
     // 이현주
-
     @Override
     public ThinkingDTO getListOne(Long id) {
         log.info("get......" + id);
         ThinkingDTO dto = ThinkingDTO.of(mapper.getListOne(id));
         return dto;
+    }
+  
+    @Override
+    public void create(ThinkingCreateDTO thinking) {
+        log.info("create......." + thinking);
+        mapper.create(thinking.toVo());
     }
 }
