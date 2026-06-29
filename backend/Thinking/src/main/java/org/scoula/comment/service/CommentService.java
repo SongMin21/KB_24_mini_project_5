@@ -8,12 +8,13 @@ import java.util.List;
 
 public interface CommentService {
     // 강민주
-    public void create(CommentCreateDTO dto);
+    public CommentDTO create(CommentCreateDTO dto);
+    public CommentDTO get(long id);
 
     // 복원준
 
     // 이현서 : 수정/삭제
-    public CommentUpdateDTO updateComment(CommentUpdateDTO comment);
+    public CommentDTO updateComment(CommentUpdateDTO comment);
 
     public CommentDeleteDTO deleteComment(CommentDeleteDTO comment);
 
