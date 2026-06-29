@@ -31,6 +31,8 @@ out/
 .idea/dataSources.local.xml
 .idea/dataSources.ids
 .idea/sqlDataSources.xml
+.idea/db-forest-config.xml
+.idea/**/db-forest-config.xml
 
 ### Eclipse ###
 .apt_generated
