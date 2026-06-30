@@ -37,7 +37,7 @@ public class ThinkingController {
     }
 
     // 강민주
-    @GetMapping("/{date}")
+    @GetMapping("/date/{date}")
     public ResponseEntity<List<ThinkingDTO>> getByDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         List<ThinkingDTO> list = service.getByDate(date);
         return ResponseEntity.ok(list);
