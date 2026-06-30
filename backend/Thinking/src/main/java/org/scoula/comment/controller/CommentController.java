@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.stream.events.Comment;
+
 @RestController
 @RequestMapping("/api/comment")
 @Log4j2
@@ -39,13 +41,13 @@ public class CommentController {
     }
     // 삭제
     @DeleteMapping("/{id}")
-    public ResponseEntity<Long> deleteComment(
+    public ResponseEntity<CommentDTO> deleteComment(
             @PathVariable Long id,
             @RequestBody CommentDeleteDTO dto){
         dto.setId(id);
-        Long deletedId = service.deleteComment(dto);
+        CommentDTO comment = service.deleteComment(dto);
 
-        return ResponseEntity.ok(deletedId);
+        return ResponseEntity.ok(comment);
     }
     // 이현주
 }

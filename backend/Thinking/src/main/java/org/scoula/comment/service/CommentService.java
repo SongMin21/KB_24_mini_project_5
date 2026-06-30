@@ -16,7 +16,7 @@ public interface CommentService {
     // 이현서 : 수정/삭제
     public CommentDTO updateComment(CommentUpdateDTO comment);
     // public CommentDeleteDTO deleteComment(CommentDeleteDTO comment);
-    public Long deleteComment(CommentDeleteDTO comment);
+    public CommentDTO deleteComment(CommentDeleteDTO comment);
 
     // 이현주
     public List<CommentDTO> selectComment(long thinkingId);
