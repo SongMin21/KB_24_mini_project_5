@@ -2,6 +2,7 @@ package org.scoula.thinking.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.scoula.thinking.dto.ThinkingDTO;
+import org.scoula.thinking.dto.ThinkingUpdateDTO;
 import org.scoula.thinking.service.ThinkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,17 @@ public class ThinkingController {
 
     // 복원준
 
+    @PutMapping("")
+    public ResponseEntity<String> updateThinking(@RequestBody ThinkingUpdateDTO dto){
+        log.info("게시글 수정 요청" + dto);
+
+        //서비스 계층 로직 실행
+        if(service.updateThinking(dto)){
+            return ResponseEntity.ok("success");
+        } else {
+            return ResponseEntity.status(401).body("fail");
+        }
+    }
     // 이현서
 
     // 이현주
