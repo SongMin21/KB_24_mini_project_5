@@ -1,28 +1,46 @@
 package org.scoula.thinking.controller;
 
-import lombok.extern.slf4j.Slf4j;
-import org.scoula.thinking.domain.ThinkingVO;
+import lombok.extern.log4j.Log4j2;
 import org.scoula.thinking.dto.ThinkingDTO;
 import org.scoula.thinking.dto.ThinkingUpdateDTO;
 import org.scoula.thinking.service.ThinkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/thinking")
+import java.util.List;
+
+// @Controller
+// @RequestMapping("/thinking")
 @RestController
-@Slf4j
-
+@Log4j2
+@RequestMapping("/api/thinking")
 public class ThinkingController {
-
     @Autowired
     private ThinkingService service;
+
+    // 전체
+    // http://localhost:8080/thinking/getlist
+//    @GetMapping("/getlist")
+//    public String getList(Model model) {
+//        model.addAttribute("list", service.getThinking());
+//        return "/thinking/list";
+//    }
+
+    @GetMapping("")
+    public ResponseEntity<List<ThinkingDTO>> getList() {
+        List<ThinkingDTO> list = service.getThinking();
+        return ResponseEntity.ok(list);
+    }
+
     // 강민주
 
     // 복원준
 
     @PutMapping("")
-    public ResponseEntity<String> updateThinking(ThinkingUpdateDTO dto){
+    public ResponseEntity<String> updateThinking(@RequestBody ThinkingUpdateDTO dto){
         log.info("게시글 수정 요청" + dto);
 
         //서비스 계층 로직 실행
