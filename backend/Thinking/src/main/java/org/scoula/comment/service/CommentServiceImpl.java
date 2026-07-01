@@ -71,12 +71,14 @@ public class CommentServiceImpl implements CommentService{
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         // 3. 비밀번호 일치할 때만 매퍼 가동시켜서 수정 처리
-        mapper.updateComment(dto.toVo());
-        log.info("update comment 완료");
-
-        // return mapper.updateComment(comment.toVo()) == 1;
-        // dto를 return
-        return get(dto.getId());
+        // 매퍼 반환값으로 최종 db 정상 업뎃 여부 확인 및 예외처리
+        int updatedRows = mapper.updateComment(dto.toVo());
+       if (updatedRows != 1) {
+            log.warn("update comment 실패 : 반영된 행이 없습니다.");
+            throw new IllegalStateException("댓글 수정에 실패했습니다.");
+            }
+       log.info("update comment 완료");
+       return get(dto.getId());
     }
 
     @Override
