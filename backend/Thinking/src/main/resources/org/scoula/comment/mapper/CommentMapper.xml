@@ -15,7 +15,7 @@
         UPDATE comment_tbl
         SET content = #{content}
         WHERE id = #{id}
-            AND password = #{password}
+            <!-- AND password = #{password} -->
     </update>
     <select id="getPassword" resultType="java.lang.String">
         SELECT password
@@ -25,7 +25,7 @@
     <delete id="deleteComment">
         DELETE FROM comment_tbl
         WHERE id = #{id}
-            AND password = #{password}
+            <!-- AND password = #{password} -->
     </delete>
     <select id="selectComment" resultType="org.scoula.comment.domain.CommentVO">
         SELECT
@@ -35,8 +35,10 @@
             created_at,
             updated_at
         FROM comment_tbl
-        WHERE thinking_id = #{thinking_id}
+        WHERE thinking_id = #{thinkingId}
         ORDER BY created_at ASC
     </select>
-
+    <select id="get" resultType="org.scoula.comment.domain.CommentVO">
+        SELECT * FROM comment_tbl where id = #{id}
+    </select>
 </mapper>
