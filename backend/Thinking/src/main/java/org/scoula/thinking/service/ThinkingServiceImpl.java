@@ -83,14 +83,10 @@ public class ThinkingServiceImpl implements ThinkingService{
 
         // 기존 vo를 dto로 변환
         List<ThinkingDTO> dto = vo.stream()
-                // 좋아요 1개 이상인 글만 조회
-                .filter(voList -> voList.getLikeCount() >= 20)
                 .map(ThinkingDTO::of)
                 .toList();
-
         return dto;
     }
-
 
     // 이현주
     @Override
