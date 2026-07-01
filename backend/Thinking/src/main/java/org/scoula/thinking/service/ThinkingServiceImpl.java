@@ -36,6 +36,7 @@ public class ThinkingServiceImpl implements ThinkingService{
     public boolean updateThinking(ThinkingUpdateDTO thinking) {
         // thinking null?
         if(thinking == null ||
+                thinking.getId() <= 0 ||
                 thinking.getCategory() == null || thinking.getCategory().trim().isEmpty() ||
                 thinking.getTitle() == null || thinking.getTitle().trim().isEmpty() ||
                 thinking.getContent() == null || thinking.getContent().trim().isEmpty() ||
