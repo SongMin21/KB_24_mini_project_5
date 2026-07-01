@@ -37,10 +37,9 @@ class ThinkingServiceImplTest {
     void deleteThinking() {
         log.info("deleteThinking test");
         ThinkingDeleteDTO thinking = ThinkingDeleteDTO.builder()
-                .id(5L)
-                .password("9999")
+                .id(20L)
+                .password("clean")
                 .build();
         log.info(service.deleteThinking(thinking));
-
     }
 }
