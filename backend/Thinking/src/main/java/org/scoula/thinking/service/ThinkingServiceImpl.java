@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.scoula.thinking.domain.ThinkingVO;
 import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
+import org.scoula.thinking.dto.ThinkingDeleteDTO;
 import org.scoula.thinking.mapper.ThinkingMapper;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +76,37 @@ public class ThinkingServiceImpl implements ThinkingService{
         // 변환된 DTO 리스트 반환
         return dtoList;
     }
+  
+    // 게시물 삭제
+    @Override
+    public boolean deleteThinking(ThinkingDeleteDTO thinking) {
+
+        // password
+        // id == 음수이면 안됨.
+        if (thinking == null || thinking.getId() <= 0) {
+            log.warn("유효하지 않은 삭제 요청");
+            throw new IllegalArgumentException("id는 1 이상이어야 합니다.");
+        }
+        if (thinking.getPassword() == null || thinking.getPassword().trim().isEmpty()) {
+            log.warn("삭제 비밀번호가 비어 있음");
+            throw new IllegalArgumentException("비밀번호는 필수입니다.");
+        }
+        long id = thinking.getId();
+        String dbPassword = mapper.getPassword(id);   // db에 저장된 password
+        String curPassword = thinking.getPassword();    // 받아온 password
+
+        // password가 일치하나?
+        if(!dbPassword.equals(curPassword)) {
+            log.warn("비밀번호가 일치하지 않음");
+            throw new IllegalArgumentException("비밀번호가 일치하지 않음");
+        }
+
+        // dto를 vo로 변경?
+        //ThinkingVO vo = thinking.toVo();
+        return mapper.delete(id) == 1;
+    }
+  
+  
     // 이현서
     @Override
     public List<ThinkingDTO> getByLike() {
@@ -92,6 +124,19 @@ public class ThinkingServiceImpl implements ThinkingService{
     }
 
 
+        // password가 일치하나?
+        if(!dbPassword.equals(curPassword)) {
+            log.warn("비밀번호가 일치하지 않음");
+            throw new IllegalArgumentException("비밀번호가 일치하지 않음");
+        }
+
+        // dto를 vo로 변경?
+//        ThinkingVO vo = thinking.toVo();
+        return mapper.delete(id) == 1;
+    }
+
+
+    // 이현서
     // 이현주
     @Override
     public ThinkingDTO getListOne(Long id) {
