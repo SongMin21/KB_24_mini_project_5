@@ -100,8 +100,11 @@ public class CommentServiceImpl implements CommentService{
         CommentDTO deletedComment = get(dto.getId());
 
         // 삭제 진행
-        mapper.deleteComment(dto.toVo());
-        log.info("[Comment Delete Success] 댓글 삭제 완료 - ID: {}", dto.getId());
+        int deleted = mapper.deleteComment(dto.toVo());
+        if(deleted != 1){
+            log.warn("delete comment 실패 : 삭제된 행 없음");
+        }
+        log.info("delete comment 완료");
 
         return deletedComment;
     }
