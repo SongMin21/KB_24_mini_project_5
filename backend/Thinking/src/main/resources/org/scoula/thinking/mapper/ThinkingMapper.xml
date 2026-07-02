@@ -56,6 +56,7 @@
     <select id="getByLike" resultType="org.scoula.thinking.domain.ThinkingVO">
         SELECT *
         FROM thinking_tbl
+        WHERE like_count >= 20
         ORDER BY like_count DESC, created_at DESC
     </select>
 
