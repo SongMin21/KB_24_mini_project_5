@@ -1,6 +1,8 @@
 package org.scoula.comment.controller;
 
 import lombok.extern.log4j.Log4j2;
+import org.scoula.thinking.service.ThinkingService;
+import org.scoula.thinking.dto.ThinkingDTO;
 import org.scoula.comment.dto.CommentCreateDTO;
 import org.scoula.comment.dto.CommentDTO;
 import org.scoula.comment.dto.CommentDeleteDTO;
@@ -9,6 +11,10 @@ import org.scoula.comment.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.stream.events.Comment;
 
@@ -16,6 +22,8 @@ import javax.xml.stream.events.Comment;
 @RequestMapping("/api/comment")
 @Log4j2
 public class CommentController {
+    @Autowired
+    private CommentService service;
 
     @Autowired
     CommentService service;
@@ -50,4 +58,8 @@ public class CommentController {
         return ResponseEntity.ok(comment);
     }
     // 이현주
+    @GetMapping("/{thinkingId}")
+    public ResponseEntity<List<CommentDTO>> selectComment(@PathVariable long thinkingId) {
+        return ResponseEntity.ok(service.selectComment(thinkingId));
+    }
 }
