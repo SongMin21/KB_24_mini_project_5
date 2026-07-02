@@ -14,9 +14,9 @@ public interface CommentService {
     // 복원준
 
     // 이현서 : 수정/삭제
-    public boolean updateComment(CommentUpdateDTO comment);
-
-    public boolean deleteComment(CommentDeleteDTO comment);
+    public CommentDTO updateComment(CommentUpdateDTO comment);
+    // public CommentDeleteDTO deleteComment(CommentDeleteDTO comment);
+    public CommentDTO deleteComment(CommentDeleteDTO comment);
 
     // 이현주
     public List<CommentDTO> selectComment(long thinkingId);
