@@ -50,6 +50,13 @@ public class ThinkingController {
             return ResponseEntity.status(401).body("fail");
         }
     }
+
+    @GetMapping("/category")
+    public ResponseEntity<List<ThinkingDTO>> getByCategory(@RequestParam("category") String category){
+        log.info("REST API 카테고리별 조회 요청 : " + category);
+        List<ThinkingDTO> list = service.getByCategory(category);
+        return ResponseEntity.ok(list);
+    }
     // 이현서
 
     // 이현주
