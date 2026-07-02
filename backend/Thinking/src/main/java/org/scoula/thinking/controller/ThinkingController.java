@@ -5,11 +5,13 @@ import org.scoula.thinking.dto.ThinkingDTO;
 import org.scoula.thinking.dto.ThinkingUpdateDTO;
 import org.scoula.thinking.service.ThinkingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 // @Controller
@@ -36,6 +38,11 @@ public class ThinkingController {
     }
 
     // 강민주
+    @GetMapping("/date/{date}")
+    public ResponseEntity<List<ThinkingDTO>> getByDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+        List<ThinkingDTO> list = service.getByDate(date);
+        return ResponseEntity.ok(list);
+    }
 
     // update like
     @PostMapping("/{id}/like")
