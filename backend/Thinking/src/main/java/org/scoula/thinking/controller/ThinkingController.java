@@ -37,6 +37,13 @@ public class ThinkingController {
 
     // 강민주
 
+    // update like
+    @PostMapping("/{id}/like")
+    public ResponseEntity<ThinkingDTO> updateLike(@PathVariable long id) {
+        ThinkingDTO thinking = service.updateLike(id);
+        return ResponseEntity.ok(thinking);
+    }
+
     // 복원준
 
     @PutMapping("")

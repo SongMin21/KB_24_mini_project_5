@@ -14,7 +14,7 @@ public interface ThinkingService {
 
     // 강민주
     public List<ThinkingDTO> getByDate(Date date);
-    public boolean updateLike(long id);
+    public ThinkingDTO updateLike(long id);
     // 복원준
     public boolean updateThinking(ThinkingUpdateDTO thinking);
     public boolean deleteThinking(ThinkingDeleteDTO dto);
