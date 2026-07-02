@@ -7,6 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.scoula.config.RootConfig;
 import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
+import org.scoula.thinking.dto.ThinkingUpdateDTO;
+import org.scoula.thinking.dto.ThinkingDeleteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -37,6 +39,33 @@ class ThinkingServiceImplTest {
         }
     }
 
+    // 복원준
+    // updateThinking test
+    @Test
+    @DisplayName("updateThinking service test")
+    void updateThinking() {
+        log.info("updateThinking service test");
+        ThinkingUpdateDTO dto = ThinkingUpdateDTO.builder()
+                .id(1L)
+                .category("LEARNED")
+                .title("[수정]제목")
+                .content("[수정]내용")
+                .password("1234")
+                .build();
+
+        log.info("update 성공 여부 : " + service.updateThinking(dto));
+    }
+  
+    @Test
+    void deleteThinking() {
+        log.info("deleteThinking test");
+        ThinkingDeleteDTO thinking = ThinkingDeleteDTO.builder()
+                .id(20L)
+                .password("clean")
+                .build();
+        log.info(service.deleteThinking(thinking));
+    }
+  
     // 이현서
     @Test
     @DisplayName("getByLike service test")
