@@ -1,9 +1,14 @@
 <script setup>
-// TODO: design.md 기반으로 Header/Footer 공통 컴포넌트는 이후 팀원이 작업 예정
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 </script>
 
 <template>
-  <RouterView />
+  <Header />
+  <main class="container">
+    <RouterView />
+  </main>
+  <Footer />
 </template>
 
 <style scoped></style>
