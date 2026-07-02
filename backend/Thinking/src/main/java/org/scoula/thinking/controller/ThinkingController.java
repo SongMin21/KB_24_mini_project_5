@@ -65,6 +65,11 @@ public class ThinkingController {
         }
     }
     // 이현서
+    @GetMapping("/like")
+    public ResponseEntity<List<ThinkingDTO>> getByLike(){
+        List<ThinkingDTO> list = service.getByLike();
+        return ResponseEntity.ok(list);
+    }
 
     // 이현주
 }
