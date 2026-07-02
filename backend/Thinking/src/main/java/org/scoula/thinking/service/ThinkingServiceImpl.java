@@ -8,7 +8,9 @@ import org.scoula.thinking.dto.ThinkingDTO;
 import org.scoula.thinking.dto.ThinkingUpdateDTO;
 import org.scoula.thinking.dto.ThinkingDeleteDTO;
 import org.scoula.thinking.mapper.ThinkingMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
@@ -54,12 +56,15 @@ public class ThinkingServiceImpl implements ThinkingService{
 
     // update like(like +1)
     @Override
-    public boolean updateLike(long id) {
+    public ThinkingDTO updateLike(long id) {
         if (id <= 0) {
             throw new IllegalArgumentException("유효하지 않은 ID입니다.");
         }
         int count = mapper.updateLike(id);
-        return count == 1;
+        if(count != 1) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "게시글을 찾을 수 없습니다.");
+        }
+        return getListOne(id);
     }
 
     // 복원준
