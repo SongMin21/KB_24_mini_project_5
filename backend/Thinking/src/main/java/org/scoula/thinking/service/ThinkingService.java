@@ -23,5 +23,5 @@ public interface ThinkingService {
     public List<ThinkingDTO> getByLike();
     // 이현주
     public ThinkingDTO getListOne(Long id);
-    public void create(ThinkingCreateDTO thinking);
+    public ThinkingDTO create(ThinkingCreateDTO thinking);
 }

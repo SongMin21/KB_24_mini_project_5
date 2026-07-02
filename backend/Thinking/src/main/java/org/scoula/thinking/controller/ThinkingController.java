@@ -1,6 +1,7 @@
 package org.scoula.thinking.controller;
 
 import lombok.extern.log4j.Log4j2;
+import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
 import org.scoula.thinking.dto.ThinkingUpdateDTO;
 import org.scoula.thinking.service.ThinkingService;
@@ -64,6 +65,7 @@ public class ThinkingController {
             return ResponseEntity.status(401).body("fail");
         }
     }
+  
     // 이현서
     @GetMapping("/like")
     public ResponseEntity<List<ThinkingDTO>> getByLike(){
@@ -72,6 +74,11 @@ public class ThinkingController {
     }
 
     // 이현주
+    @PostMapping("")
+    public ResponseEntity<ThinkingDTO> create(@RequestBody ThinkingCreateDTO thinking){
+        return ResponseEntity.ok(service.create(thinking));
+    }
+  
     @GetMapping("/{id}")
     public ResponseEntity<ThinkingDTO> getListOne(@PathVariable Long id){
         return ResponseEntity.ok(service.getListOne(id));

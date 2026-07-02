@@ -173,8 +173,10 @@ public class ThinkingServiceImpl implements ThinkingService{
     }
   
     @Override
-    public void create(ThinkingCreateDTO thinking) {
+    public ThinkingDTO create(ThinkingCreateDTO thinking) {
         log.info("create......." + thinking);
-        mapper.create(thinking.toVo());
+        ThinkingVO vo = thinking.toVo();
+        mapper.create(vo);
+        return getListOne(vo.getId());
     }
 }
