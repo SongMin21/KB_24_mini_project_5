@@ -8,6 +8,8 @@ import org.scoula.comment.dto.CommentUpdateDTO;
 import org.scoula.comment.dto.CommentDTO;
 import org.scoula.comment.dto.CommentCreateDTO;
 import org.scoula.comment.mapper.CommentMapper;
+import org.scoula.exception.PasswordMismatchException;
+import org.scoula.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.xml.stream.events.Comment;
@@ -40,11 +42,13 @@ public class CommentServiceImpl implements CommentService{
         if(id <= 0) {
             throw new IllegalArgumentException("id 값이 음수입니다.");
         }
+        CommentVO vo = mapper.get(id);
+        if (vo == null) {
+            throw new ResourceNotFoundException("존재하지 않는 댓글입니다.");
+        }
         CommentDTO dto = CommentDTO.of(mapper.get(id));
         return dto;
     }
-
-    // 복원준
 
     // 이현서 : 수정/삭제
     @Override
@@ -61,14 +65,13 @@ public class CommentServiceImpl implements CommentService{
             log.warn("update comment 실패 : 존재하지 않거나 이미 삭제된 댓글");
 
             // 유효하지 않은 인자값 예외
-            throw new IllegalArgumentException("존재하지 않거나 이미 삭제된 댓글입니다.");
+            throw new ResourceNotFoundException("존재하지 않거나 이미 삭제된 댓글입니다.");
         }
 
          // b. 사용자 입력 비번과 DB 비번 불일치
-        if (!realPassword.equals(dto.getPassword())) {
-            log.warn("update comment 실패 : 비밀번호 불일치");
-
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        if (!realPassword.equals(comment.getPassword())) {
+            log.warn("[Comment Update Fail] 비밀번호 불일치 - 요청된 ID: {}", comment.getId());
+            throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
         }
         // 3. 비밀번호 일치할 때만 매퍼 가동시켜서 수정 처리
         // 매퍼 반환값으로 최종 db 정상 업뎃 여부 확인 및 예외처리
@@ -88,12 +91,13 @@ public class CommentServiceImpl implements CommentService{
         String realPassword = mapper.getPassword(dto.getId());
 
         if (realPassword == null) {
-            log.warn("delete comment 실패 : 존재하지 않거나 이미 삭제된 댓글");
-            throw new IllegalArgumentException("존재하지 않거나 이미 삭제된 댓글입니다.");
+            log.warn("[Comment Delete Fail] 댓글 없음 - 요청된 ID: {}", comment.getId());
+            throw new ResourceNotFoundException("존재하지 않거나 이미 삭제된 댓글입니다.");
         }
-        if (!realPassword.equals(dto.getPassword())) {
-            log.warn("delete comment 실패 : 비밀번호 불일치");
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+
+        if (!realPassword.equals(comment.getPassword())) {
+            log.warn("[Comment Delete Fail] 비밀번호 불일치 - 요청된 ID: {}", comment.getId());
+            throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
         }
 
         // 삭제 전에 꺼내두기
