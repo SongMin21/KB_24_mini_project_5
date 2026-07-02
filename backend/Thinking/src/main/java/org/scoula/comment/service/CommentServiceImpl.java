@@ -69,8 +69,8 @@ public class CommentServiceImpl implements CommentService{
         }
 
          // b. 사용자 입력 비번과 DB 비번 불일치
-        if (!realPassword.equals(comment.getPassword())) {
-            log.warn("[Comment Update Fail] 비밀번호 불일치 - 요청된 ID: {}", comment.getId());
+        if (!realPassword.equals(dto.getPassword())) {
+            log.warn("[Comment Update Fail] 비밀번호 불일치 - 요청된 ID: {}", dto.getId());
             throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
         }
         // 3. 비밀번호 일치할 때만 매퍼 가동시켜서 수정 처리
@@ -91,12 +91,12 @@ public class CommentServiceImpl implements CommentService{
         String realPassword = mapper.getPassword(dto.getId());
 
         if (realPassword == null) {
-            log.warn("[Comment Delete Fail] 댓글 없음 - 요청된 ID: {}", comment.getId());
+            log.warn("[Comment Delete Fail] 댓글 없음 - 요청된 ID: {}", dto.getId());
             throw new ResourceNotFoundException("존재하지 않거나 이미 삭제된 댓글입니다.");
         }
 
-        if (!realPassword.equals(comment.getPassword())) {
-            log.warn("[Comment Delete Fail] 비밀번호 불일치 - 요청된 ID: {}", comment.getId());
+        if (!realPassword.equals(dto.getPassword())) {
+            log.warn("[Comment Delete Fail] 비밀번호 불일치 - 요청된 ID: {}", dto.getId());
             throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
         }
 
