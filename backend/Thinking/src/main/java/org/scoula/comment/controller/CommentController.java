@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.stream.events.Comment;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/comment")
@@ -24,9 +25,6 @@ import javax.xml.stream.events.Comment;
 public class CommentController {
     @Autowired
     private CommentService service;
-
-    @Autowired
-    CommentService service;
 
     // 강민주
     @PostMapping("/{id}")
@@ -57,6 +55,7 @@ public class CommentController {
 
         return ResponseEntity.ok(comment);
     }
+
     // 이현주
     @GetMapping("/{thinkingId}")
     public ResponseEntity<List<CommentDTO>> selectComment(@PathVariable long thinkingId) {
