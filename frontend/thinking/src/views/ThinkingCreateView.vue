@@ -1,16 +1,16 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import api from '@/api/axios'
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import api from '@/api/axios';
 
-const router = useRouter()
+const router = useRouter();
 
-const category = ref('')
-const title = ref('')
-const content = ref('')
-const password = ref('')
-const loading = ref(false)
-const errorMessage = ref('')
+const category = ref('');
+const title = ref('');
+const content = ref('');
+const password = ref('');
+const loading = ref(false);
+const errorMessage = ref('');
 
 // 모든 항목이 비어있지 않은지 검증
 const isFormValid = computed(() => {
@@ -19,52 +19,51 @@ const isFormValid = computed(() => {
     title.value.trim() &&
     content.value.trim() &&
     password.value.trim()
-  )
-})
+  );
+});
 
 const selectCategory = (val) => {
-  category.value = val
-}
+  category.value = val;
+};
 
 const goToList = () => {
-  router.push({ name: 'thinking-list' })
-}
+  router.push({ name: 'thinking-list' });
+};
 
 const handleSubmit = async () => {
-  if (!isFormValid.value) return
+  if (!isFormValid.value) return;
 
-  loading.value = true
-  errorMessage.value = ''
+  loading.value = true;
+  errorMessage.value = '';
 
   try {
     const { data } = await api.post('/thinking', {
       category: category.value,
       title: title.value,
       content: content.value,
-      password: password.value
-    })
+      password: password.value,
+    });
 
     router.push({
-      name: 'thinking-list'
-    })
+      name: 'thinking-detail',
+      params: { id: data.id },
+    });
   } catch (e) {
-    const msg = e.response?.data ?? '오류가 발생했습니다.'
+    const msg = e.response?.data ?? '오류가 발생했습니다.';
     // 백엔드 에러 응답은 plain text 문자열
-    errorMessage.value = msg
-    console.error(msg)
+    errorMessage.value = msg;
+    console.error(msg);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-}
+};
 </script>
 
 <template>
   <div class="thinking-create-container">
     <!-- 뒤로가기 링크 -->
     <div class="back-link-wrapper">
-      <button @click="goToList" class="back-link">
-        ← 목록으로
-      </button>
+      <button @click="goToList" class="back-link">← 목록으로</button>
     </div>
 
     <!-- 페이지 타이틀 -->
@@ -72,7 +71,6 @@ const handleSubmit = async () => {
 
     <!-- 작성 폼 카드 -->
     <form @submit.prevent="handleSubmit" class="form-card">
-      
       <!-- 에러 메시지 표시 -->
       <div v-if="errorMessage" class="error-banner">
         {{ errorMessage }}
@@ -80,7 +78,9 @@ const handleSubmit = async () => {
 
       <!-- 카테고리 선택 -->
       <div class="form-group">
-        <label class="form-label">카테고리 선택 <span class="required">*</span></label>
+        <label class="form-label"
+          >카테고리 선택 <span class="required">*</span></label
+        >
         <div class="category-buttons">
           <button
             type="button"
@@ -111,7 +111,9 @@ const handleSubmit = async () => {
 
       <!-- 제목 입력 -->
       <div class="form-group">
-        <label for="title" class="form-label">제목 <span class="required">*</span></label>
+        <label for="title" class="form-label"
+          >제목 <span class="required">*</span></label
+        >
         <input
           id="title"
           v-model="title"
@@ -124,7 +126,9 @@ const handleSubmit = async () => {
 
       <!-- 내용 입력 -->
       <div class="form-group">
-        <label for="content" class="form-label">내용 <span class="required">*</span></label>
+        <label for="content" class="form-label"
+          >내용 <span class="required">*</span></label
+        >
         <textarea
           id="content"
           v-model="content"
@@ -136,7 +140,9 @@ const handleSubmit = async () => {
 
       <!-- 비밀번호 입력 -->
       <div class="form-group half-width">
-        <label for="password" class="form-label">비밀번호 (수정/삭제 시 필요) <span class="required">*</span></label>
+        <label for="password" class="form-label"
+          >비밀번호 (수정/삭제 시 필요) <span class="required">*</span></label
+        >
         <input
           id="password"
           v-model="password"
@@ -149,9 +155,7 @@ const handleSubmit = async () => {
 
       <!-- 하단 버튼 영역 -->
       <div class="form-actions">
-        <button type="button" @click="goToList" class="btn-cancel">
-          취소
-        </button>
+        <button type="button" @click="goToList" class="btn-cancel">취소</button>
         <button
           type="submit"
           class="btn-submit"
