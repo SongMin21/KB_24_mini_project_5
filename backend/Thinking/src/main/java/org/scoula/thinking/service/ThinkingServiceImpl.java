@@ -87,7 +87,7 @@ public class ThinkingServiceImpl implements ThinkingService{
 
     // 게시물 삭제
     @Override
-    public boolean deleteThinking(ThinkingDeleteDTO thinking) {
+    public ThinkingDTO deleteThinking(ThinkingDeleteDTO thinking) {
 
         // password
         // id == 음수이면 안됨.
@@ -115,9 +115,11 @@ public class ThinkingServiceImpl implements ThinkingService{
             throw new PasswordMismatchException("비밀번호가 일치하지 않음");
         }
 
-        // dto를 vo로 변경?
-        //ThinkingVO vo = thinking.toVo();
-        return mapper.delete(id) == 1;
+        ThinkingDTO dto = getListOne(thinking.toVo().getId());
+        if(mapper.delete(id) != 1) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "게시글 삭제를 실패했습니다.");
+        }
+        return dto;
     }
 
     @Override
