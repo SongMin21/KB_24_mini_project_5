@@ -3,6 +3,7 @@ package org.scoula.thinking.controller;
 import lombok.extern.log4j.Log4j2;
 import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
+import org.scoula.thinking.dto.ThinkingDeleteDTO;
 import org.scoula.thinking.dto.ThinkingUpdateDTO;
 import org.scoula.thinking.service.ThinkingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,13 +67,22 @@ public class ThinkingController {
         }
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteThinking(ThinkingDeleteDTO dto){
+        if(service.deleteThinking(dto)){
+            return ResponseEntity.ok("success");
+        } else {
+            return ResponseEntity.status(401).body("fail");
+        }
+    }
+
     @GetMapping("/category")
     public ResponseEntity<List<ThinkingDTO>> getByCategory(@RequestParam("category") String category){
         log.info("REST API 카테고리별 조회 요청 : " + category);
         List<ThinkingDTO> list = service.getByCategory(category);
         return ResponseEntity.ok(list);
     }
-  
+
     // 이현서
     @GetMapping("/like")
     public ResponseEntity<List<ThinkingDTO>> getByLike(){
@@ -85,7 +95,7 @@ public class ThinkingController {
     public ResponseEntity<ThinkingDTO> create(@RequestBody ThinkingCreateDTO thinking){
         return ResponseEntity.ok(service.create(thinking));
     }
-  
+
     @GetMapping("/{id}")
     public ResponseEntity<ThinkingDTO> getListOne(@PathVariable Long id){
         return ResponseEntity.ok(service.getListOne(id));
