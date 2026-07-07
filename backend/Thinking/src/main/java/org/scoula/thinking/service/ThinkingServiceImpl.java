@@ -2,13 +2,17 @@ package org.scoula.thinking.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.scoula.exception.PasswordMismatchException;
+import org.scoula.exception.ResourceNotFoundException;
 import org.scoula.thinking.domain.ThinkingVO;
 import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
 import org.scoula.thinking.dto.ThinkingUpdateDTO;
 import org.scoula.thinking.dto.ThinkingDeleteDTO;
 import org.scoula.thinking.mapper.ThinkingMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
@@ -54,12 +58,15 @@ public class ThinkingServiceImpl implements ThinkingService{
 
     // update like(like +1)
     @Override
-    public boolean updateLike(long id) {
+    public ThinkingDTO updateLike(long id) {
         if (id <= 0) {
             throw new IllegalArgumentException("유효하지 않은 ID입니다.");
         }
         int count = mapper.updateLike(id);
-        return count == 1;
+        if(count != 1) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "게시글을 찾을 수 없습니다.");
+        }
+        return getListOne(id);
     }
 
     // 복원준
@@ -77,7 +84,7 @@ public class ThinkingServiceImpl implements ThinkingService{
         // 변환된 DTO 리스트 반환
         return dtoList;
     }
-  
+
     // 게시물 삭제
     @Override
     public boolean deleteThinking(ThinkingDeleteDTO thinking) {
@@ -96,17 +103,23 @@ public class ThinkingServiceImpl implements ThinkingService{
         String dbPassword = mapper.getPassword(id);   // db에 저장된 password
         String curPassword = thinking.getPassword();    // 받아온 password
 
+        // 게시글 자체가 없음 -> 404
+        if (dbPassword == null || dbPassword.trim().isEmpty()) {
+            log.warn("존재하지 않는 게시글 - id: {}", id);
+            throw new ResourceNotFoundException("존재하지 않는 게시글입니다.");
+        }
+
         // password가 일치하나?
         if(!dbPassword.equals(curPassword)) {
             log.warn("비밀번호가 일치하지 않음");
-            throw new IllegalArgumentException("비밀번호가 일치하지 않음");
+            throw new PasswordMismatchException("비밀번호가 일치하지 않음");
         }
 
         // dto를 vo로 변경?
         //ThinkingVO vo = thinking.toVo();
         return mapper.delete(id) == 1;
     }
-  
+
     @Override
     public boolean updateThinking(ThinkingUpdateDTO thinking) {
         // thinking null?
@@ -131,21 +144,21 @@ public class ThinkingServiceImpl implements ThinkingService{
 
         // password null?
         if(dbPassword == null || dbPassword.trim().isEmpty()) {
-            log.warn("db의 password가 null");
-            throw new IllegalArgumentException("db password가 없음");
+            log.warn("존재하지 않는 게시글 - id: {}", id);
+            throw new ResourceNotFoundException("존재하지 않는 게시글입니다.");
         }
 
         // password가 일치하나?
         if(!dbPassword.equals(curPassword)) {
             log.warn("비밀번호가 일치하지 않음");
-            throw new IllegalArgumentException("비밀번호가 일치하지 않음");
+            throw new PasswordMismatchException("비밀번호가 일치하지 않음");
         }
         // dto를 vo로 변경?
         ThinkingVO vo = thinking.toVo();
         // update?
         return mapper.update(vo) == 1;
     }
-  
+
     // 이현서
     @Override
     public List<ThinkingDTO> getByLike() {
@@ -154,11 +167,8 @@ public class ThinkingServiceImpl implements ThinkingService{
 
         // 기존 vo를 dto로 변환
         List<ThinkingDTO> dto = vo.stream()
-                // 좋아요 1개 이상인 글만 조회
-                .filter(voList -> voList.getLikeCount() >= 20)
                 .map(ThinkingDTO::of)
                 .toList();
-
         return dto;
     }
 
@@ -166,13 +176,21 @@ public class ThinkingServiceImpl implements ThinkingService{
     @Override
     public ThinkingDTO getListOne(Long id) {
         log.info("get......" + id);
-        ThinkingDTO dto = ThinkingDTO.of(mapper.getListOne(id));
+        ThinkingVO vo = mapper.getListOne(id);
+
+        if (vo == null) {
+            throw new ResourceNotFoundException("존재하지 않는 게시글입니다.");
+        }
+
+        ThinkingDTO dto = ThinkingDTO.of(vo);
         return dto;
     }
-  
+
     @Override
-    public void create(ThinkingCreateDTO thinking) {
+    public ThinkingDTO create(ThinkingCreateDTO thinking) {
         log.info("create......." + thinking);
-        mapper.create(thinking.toVo());
+        ThinkingVO vo = thinking.toVo();
+        mapper.create(vo);
+        return getListOne(vo.getId());
     }
 }
