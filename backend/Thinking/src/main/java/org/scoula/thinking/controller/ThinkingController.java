@@ -3,6 +3,7 @@ package org.scoula.thinking.controller;
 import lombok.extern.log4j.Log4j2;
 import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
+import org.scoula.thinking.dto.ThinkingDeleteDTO;
 import org.scoula.thinking.dto.ThinkingUpdateDTO;
 import org.scoula.thinking.service.ThinkingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,15 @@ public class ThinkingController {
         log.info("REST API 카테고리별 조회 요청 : " + category);
         List<ThinkingDTO> list = service.getByCategory(category);
         return ResponseEntity.ok(list);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ThinkingDTO> deleteThinking(@PathVariable long id, @RequestParam String password) {
+        ThinkingDeleteDTO dto = ThinkingDeleteDTO.builder()
+                .id(id)
+                .password(password)
+                .build();
+        return ResponseEntity.ok(service.deleteThinking(dto));
     }
   
     // 이현서
