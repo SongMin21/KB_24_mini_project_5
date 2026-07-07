@@ -56,15 +56,9 @@ public class ThinkingController {
     // 복원준
 
     @PutMapping("")
-    public ResponseEntity<String> updateThinking(@RequestBody ThinkingUpdateDTO dto){
+    public ResponseEntity<ThinkingDTO> updateThinking(@RequestBody ThinkingUpdateDTO dto){
         log.info("게시글 수정 요청" + dto);
-
-        //서비스 계층 로직 실행
-        if(service.updateThinking(dto)){
-            return ResponseEntity.ok("success");
-        } else {
-            return ResponseEntity.status(401).body("fail");
-        }
+        return ResponseEntity.ok(service.updateThinking(dto));
     }
 
     @DeleteMapping("/delete")

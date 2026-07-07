@@ -16,7 +16,7 @@ public interface ThinkingService {
     public List<ThinkingDTO> getByDate(Date date);
     public ThinkingDTO updateLike(long id);
     // 복원준
-    public boolean updateThinking(ThinkingUpdateDTO thinking);
+    public ThinkingDTO updateThinking(ThinkingUpdateDTO thinking);
     public boolean deleteThinking(ThinkingDeleteDTO dto);
     public List<ThinkingDTO> getByCategory(String category);
     // 이현서
