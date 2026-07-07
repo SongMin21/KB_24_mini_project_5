@@ -147,25 +147,19 @@ const handleSubmit = async () => {
   errorMessage.value = ''
   
   try {
-    // PUT /api/thinking 요청 body 조립
+    // PUT /api/thinking/{id} 요청 body 조립
     const requestBody = {
-      id: thinkingId,
       category: category.value,
       title: title.value,
       content: content.value,
       password: password.value
     }
 
-    const response = await api.put('/thinking', requestBody)
+    // 백엔드는 id를 경로 변수(@PathVariable)로 받으므로 URL에 포함해야 함
+    await api.put(`/thinking/${thinkingId}`, requestBody)
 
-    // 백엔드 제약사항 2번: 응답 바디가 plain text인 "success" 인지 확인
-    if (response.data === 'success') {
-      // 성공 시 상세 페이지로 이동
-      router.push({ name: 'thinking-detail', params: { id: thinkingId } })
-    } else {
-      // 응답 바디가 "fail"인 경우 처리
-      errorMessage.value = '비밀번호가 일치하지 않거나 수정에 실패했습니다.'
-    }
+    // 성공 시 상세 페이지로 이동 (예외가 발생하지 않으면 성공, 응답은 수정된 게시글 JSON)
+    router.push({ name: 'thinking-detail', params: { id: thinkingId } })
   } catch (e) {
     console.error(e)
     // 백엔드 제약사항 1번: 에러 응답이 plain text 문자열로 옴

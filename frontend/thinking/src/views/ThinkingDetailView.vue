@@ -65,7 +65,14 @@ onMounted(async () => {
   try {
     await Promise.all([fetchThinking(), fetchComments()])
   } catch (e) {
-    console.error(e.response?.data ?? '오류가 발생했습니다.')
+    console.error(e)
+    router.push({
+      name: 'error',
+      query: {
+        status: e.response?.status ?? 500,
+        message: e.response?.data,
+      },
+    })
   } finally {
     loading.value = false
   }
