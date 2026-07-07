@@ -1,13 +1,14 @@
-<template>
-  <div></div>
-</template>
-
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
+<script setup>
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 </script>
 
-<style lang="scss" scoped></style>
+<template>
+  <Header />
+  <main class="container">
+    <RouterView />
+  </main>
+  <Footer />
+</template>
+
+<style scoped></style>

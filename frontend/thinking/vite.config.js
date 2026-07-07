@@ -14,10 +14,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
+      // 백엔드(Tomcat, backend/Thinking)는 context-path가 "/"이고 컨트롤러가 이미
+      // "/api/..."로 매핑되어 있어서 rewrite 없이 그대로 전달한다.
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'http://localhost:8080',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },
