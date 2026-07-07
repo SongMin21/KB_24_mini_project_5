@@ -360,7 +360,7 @@ const confirmPassword = async () => {
   display: inline-block;
   padding: 4px 12px;
   border-radius: 999px;
-  color: #fff;
+  color: var(--color-on-accent);
   font-size: 13px;
   font-weight: 600;
 }
@@ -405,7 +405,7 @@ const confirmPassword = async () => {
 }
 
 .like-btn.flash {
-  color: #e53935;
+  color: var(--color-danger);
 }
 
 .heart-icon {
@@ -441,7 +441,7 @@ const confirmPassword = async () => {
 .confirm-btn,
 .submit-btn {
   border: 1px solid var(--color-border);
-  background: #fff;
+  background: var(--color-card);
   border-radius: 8px;
   padding: 6px 14px;
   font-size: 14px;
@@ -453,7 +453,7 @@ const confirmPassword = async () => {
 .save-btn {
   border: none;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   font-weight: 600;
 }
 
@@ -574,7 +574,7 @@ const confirmPassword = async () => {
 }
 
 .modal-error {
-  color: #e53935;
+  color: var(--color-danger);
   font-size: 13px;
   margin: 8px 0 0;
 }
