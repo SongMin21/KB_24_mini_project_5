@@ -62,15 +62,6 @@ public class ThinkingController {
         return ResponseEntity.ok(service.updateThinking(dto));
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteThinking(ThinkingDeleteDTO dto){
-        if(service.deleteThinking(dto)){
-            return ResponseEntity.ok("success");
-        } else {
-            return ResponseEntity.status(401).body("fail");
-        }
-    }
-
     @GetMapping("/category")
     public ResponseEntity<List<ThinkingDTO>> getByCategory(@RequestParam("category") String category){
         log.info("REST API 카테고리별 조회 요청 : " + category);
@@ -78,6 +69,15 @@ public class ThinkingController {
         return ResponseEntity.ok(list);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ThinkingDTO> deleteThinking(@PathVariable long id, @RequestParam String password) {
+        ThinkingDeleteDTO dto = ThinkingDeleteDTO.builder()
+                .id(id)
+                .password(password)
+                .build();
+        return ResponseEntity.ok(service.deleteThinking(dto));
+    }
+  
     // 이현서
     @GetMapping("/like")
     public ResponseEntity<List<ThinkingDTO>> getByLike(){
