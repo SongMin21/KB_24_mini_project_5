@@ -55,9 +55,10 @@ public class ThinkingController {
 
     // 복원준
 
-    @PutMapping("")
-    public ResponseEntity<ThinkingDTO> updateThinking(@RequestBody ThinkingUpdateDTO dto){
+    @PutMapping("/{id}")
+    public ResponseEntity<ThinkingDTO> updateThinking(@PathVariable long id, @RequestBody ThinkingUpdateDTO dto){
         log.info("게시글 수정 요청" + dto);
+        dto.setId(id);
         return ResponseEntity.ok(service.updateThinking(dto));
     }
 
