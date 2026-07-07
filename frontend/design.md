@@ -8,18 +8,23 @@
 
 ## 디자인 방향
 
-- **톤**: 따뜻하고 편안한 분위기. 익명이지만 진솔한 회고를 유도하는 느낌.
-- **컬러 팔레트**:
-  - Primary: #4A90D9 (차분한 블루)
-  - 배운 것(LEARNED): #4CAF50 (그린)
-  - 부족한 것(LACKED): #FF9800 (오렌지)
-  - 좋았던 것(GOOD): #E91E63 (핑크)
-  - Background: #F5F5F5 (라이트 그레이)
+- **톤**: KB 브랜드 아이덴티티를 반영한 신뢰감 있고 따뜻한 분위기.
+- **컬러 팔레트** (KB 브랜드 컬러 기준):
+  - Primary: #FFBC00 (KB Yellow Positive) — 주요 버튼, 선택된 탭, CTA
+  - Primary Hover: #E6A800
+  - On Primary(노란 배경 위 텍스트): #2B2313
+  - 배운 것(LEARNED): #4CAF50 (그린, 유지)
+  - 부족한 것(LACKED): #FF9800 (오렌지, 유지)
+  - 좋았던 것(GOOD): #E91E63 (핑크, 유지)
+  - Background: #F7F5F0
   - Card: #FFFFFF
-  - Text Primary: #212121
-  - Text Secondary: #757575
+  - Text Primary: #545045 (KB Dark Gray)
+  - Text Secondary: #60584C (KB Gray)
+  - Border: #E6E1D6
+  - Danger: #D32F2F
 - **폰트**: Pretendard 또는 Noto Sans KR
-- **스타일**: 카드 기반 레이아웃, 둥근 모서리(border-radius: 12px), 부드러운 그림자
+- **스타일**: 카드 기반 레이아웃, 둥근 모서리(카드 12px / 인풋·일반버튼 8px / 알약형 버튼 999px), 부드러운 그림자
+- **헤더**: 흰 배경 유지, "글쓰기" CTA 버튼만 KB Yellow로 강조
 - **반응형**: 데스크톱 기준 max-width 960px 중앙 정렬
 
 ---
