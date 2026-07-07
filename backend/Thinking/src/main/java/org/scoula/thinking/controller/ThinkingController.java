@@ -55,16 +55,11 @@ public class ThinkingController {
 
     // 복원준
 
-    @PutMapping("")
-    public ResponseEntity<String> updateThinking(@RequestBody ThinkingUpdateDTO dto){
+    @PutMapping("/{id}")
+    public ResponseEntity<ThinkingDTO> updateThinking(@PathVariable long id, @RequestBody ThinkingUpdateDTO dto){
         log.info("게시글 수정 요청" + dto);
-
-        //서비스 계층 로직 실행
-        if(service.updateThinking(dto)){
-            return ResponseEntity.ok("success");
-        } else {
-            return ResponseEntity.status(401).body("fail");
-        }
+        dto.setId(id);
+        return ResponseEntity.ok(service.updateThinking(dto));
     }
 
     @GetMapping("/category")
@@ -95,7 +90,7 @@ public class ThinkingController {
     public ResponseEntity<ThinkingDTO> create(@RequestBody ThinkingCreateDTO thinking){
         return ResponseEntity.ok(service.create(thinking));
     }
-  
+
     @GetMapping("/{id}")
     public ResponseEntity<ThinkingDTO> getListOne(@PathVariable Long id){
         return ResponseEntity.ok(service.getListOne(id));

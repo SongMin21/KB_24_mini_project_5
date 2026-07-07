@@ -16,7 +16,7 @@ public interface ThinkingMapper {
     );
     public int updateLike(long id);
     public List<ThinkingVO> getByDate(Date date);
-    public int delete(long id);
+    public int delete(long id); // id와 password가 일치하는 경우 삭제
     public List<ThinkingVO> getByLike();
     // get password
     public String getPassword(long id);

@@ -123,7 +123,7 @@ public class ThinkingServiceImpl implements ThinkingService{
     }
 
     @Override
-    public boolean updateThinking(ThinkingUpdateDTO thinking) {
+    public ThinkingDTO updateThinking(ThinkingUpdateDTO thinking) {
         // thinking null?
         if(thinking == null ||
                 thinking.getId() <= 0 ||
@@ -158,7 +158,10 @@ public class ThinkingServiceImpl implements ThinkingService{
         // dto를 vo로 변경?
         ThinkingVO vo = thinking.toVo();
         // update?
-        return mapper.update(vo) == 1;
+        if(mapper.update(vo) != 1) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "게시물 수정에 실패했습니다.");
+        }
+        return getListOne(vo.getId());
     }
 
     // 이현서
