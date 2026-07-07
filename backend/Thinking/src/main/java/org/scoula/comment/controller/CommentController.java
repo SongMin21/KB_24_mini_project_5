@@ -55,6 +55,7 @@ public class CommentController {
 
         return ResponseEntity.ok(comment);
     }
+
     // 이현주
     @GetMapping("/{thinkingId}")
     public ResponseEntity<List<CommentDTO>> selectComment(@PathVariable long thinkingId) {
