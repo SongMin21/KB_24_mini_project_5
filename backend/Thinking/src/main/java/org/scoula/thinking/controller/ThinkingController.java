@@ -54,6 +54,7 @@ public class ThinkingController {
 
     // 복원준
 
+
     @PutMapping("")
     public ResponseEntity<String> updateThinking(@RequestBody ThinkingUpdateDTO dto){
         log.info("게시글 수정 요청" + dto);
