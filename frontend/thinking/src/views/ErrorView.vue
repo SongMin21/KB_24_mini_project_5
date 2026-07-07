@@ -72,10 +72,10 @@ const goToList = () => {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  border: 1px solid #e5eaf0;
+  border: 1px solid var(--color-border);
   border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 6px 18px rgba(20, 37, 63, 0.06);
+  background: var(--color-card);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
   padding: 48px 32px;
   text-align: center;
 }
@@ -88,7 +88,7 @@ const goToList = () => {
 
 .error-status {
   margin: 0;
-  color: #c7d0dc;
+  color: var(--color-border);
   font-size: 15px;
   font-weight: 800;
   letter-spacing: 0.05em;
@@ -96,14 +96,14 @@ const goToList = () => {
 
 .error-title {
   margin: 0;
-  color: #20242a;
+  color: var(--color-text-primary);
   font-size: 22px;
   font-weight: 800;
 }
 
 .error-description {
   margin: 0;
-  color: #6b7280;
+  color: var(--color-text-secondary);
   font-size: 15px;
   line-height: 1.6;
 }
@@ -113,14 +113,14 @@ const goToList = () => {
   border: none;
   border-radius: 999px;
   padding: 12px 28px;
-  background: #4a90d9;
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
   font-size: 14px;
   font-weight: 700;
   transition: background-color 0.15s ease;
 }
 
 .back-button:hover {
-  background-color: #3d7ab8;
+  background-color: var(--color-primary-hover);
 }
 </style>
