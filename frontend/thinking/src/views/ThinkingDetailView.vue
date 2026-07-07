@@ -1,7 +1,4 @@
 <script setup>
-// TODO: design.md 기반으로 팀원이 작업 예정
-// GET /api/thinking/{id}, POST /api/thinking/{id}/like, GET /api/comment/{thinkingId}
-defineProps({
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import api from '@/api/axios'
@@ -12,14 +9,6 @@ const props = defineProps({
     required: true,
   },
 })
-</script>
-
-<template>
-  <div>
-    <h1>상세 Page</h1>
-    <!-- TODO -->
-  </div>
-</template>
 
 const router = useRouter()
 
