@@ -210,13 +210,13 @@ const handleSubmit = async () => {
 }
 
 .error-banner {
-  background-color: #ffebee;
-  color: #c62828;
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
   padding: 12px 16px;
   border-radius: 8px;
   margin-bottom: 24px;
   font-size: 14px;
-  border-left: 4px solid #e53935;
+  border-left: 4px solid var(--color-danger);
 }
 
 .form-group {
@@ -242,7 +242,7 @@ const handleSubmit = async () => {
 }
 
 .required {
-  color: #e53935;
+  color: var(--color-danger);
   margin-left: 2px;
 }
 
@@ -260,7 +260,7 @@ const handleSubmit = async () => {
   border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
-  background: #ffffff;
+  background: var(--color-card);
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
   transition: all 0.2s ease;
@@ -293,19 +293,19 @@ const handleSubmit = async () => {
 .category-btn.learned.active {
   background: var(--color-learned);
   border-color: var(--color-learned);
-  color: #ffffff;
+  color: var(--color-on-accent);
 }
 
 .category-btn.lacked.active {
   background: var(--color-lacked);
   border-color: var(--color-lacked);
-  color: #ffffff;
+  color: var(--color-on-accent);
 }
 
 .category-btn.good.active {
   background: var(--color-good);
   border-color: var(--color-good);
-  color: #ffffff;
+  color: var(--color-on-accent);
 }
 
 /* Input Styles */
@@ -316,7 +316,7 @@ const handleSubmit = async () => {
   border: 1px solid var(--color-border);
   font-size: 15px;
   color: var(--color-text-primary);
-  background-color: #ffffff;
+  background-color: var(--color-card);
   outline: none;
   transition: border-color 0.2s ease;
 }
@@ -333,7 +333,7 @@ const handleSubmit = async () => {
   border: 1px solid var(--color-border);
   font-size: 15px;
   color: var(--color-text-primary);
-  background-color: #ffffff;
+  background-color: var(--color-card);
   outline: none;
   resize: vertical;
   line-height: 1.6;
@@ -360,7 +360,7 @@ const handleSubmit = async () => {
   border-radius: 8px;
   font-size: 15px;
   font-weight: 500;
-  background: #ffffff;
+  background: var(--color-card);
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
   transition: all 0.2s ease;
@@ -368,7 +368,7 @@ const handleSubmit = async () => {
 
 .btn-cancel:hover {
   background: var(--color-background);
-  border-color: #cccccc;
+  border-color: var(--color-border);
   color: var(--color-text-primary);
 }
 
@@ -379,20 +379,20 @@ const handleSubmit = async () => {
   font-weight: 500;
   background: var(--color-primary);
   border: 1px solid var(--color-primary);
-  color: #ffffff;
+  color: var(--color-on-primary);
   transition: all 0.2s ease;
 }
 
 .btn-submit:hover:not(:disabled) {
-  background: #357ae8;
-  border-color: #357ae8;
-  box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  box-shadow: 0 2px 8px rgba(255, 188, 0, 0.3);
 }
 
 .btn-submit:disabled {
-  background: #b0bec5;
-  border-color: #b0bec5;
+  background: var(--color-disabled);
+  border-color: var(--color-disabled);
   cursor: not-allowed;
-  color: #ffffff;
+  color: var(--color-on-accent);
 }
 </style>
