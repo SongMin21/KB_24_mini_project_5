@@ -39,23 +39,15 @@ const categoryLabelMap = {
   GOOD: '좋았던 점',
 }
 
-const filteredItems = computed(() => {
-  if (activeTab.value !== 'category') {
-    return items.value
-  }
-
-  return items.value.filter((item) => item.category === selectedCategory.value)
-})
-
 const totalPages = computed(() => {
-  return Math.max(1, Math.ceil(filteredItems.value.length / pageSize))
+  return Math.max(1, Math.ceil(items.value.length / pageSize))
 })
 
 const pagedItems = computed(() => {
   const start = pageSize * (currentPage.value - 1)
   const end = pageSize * currentPage.value
 
-  return filteredItems.value.slice(start, end)
+  return items.value.slice(start, end)
 })
 
 const pageNumbers = computed(() => {
@@ -114,6 +106,24 @@ const fetchDateItems = async () => {
   }
 }
 
+const fetchCategoryItems = async () => {
+  isLoading.value = true
+  errorMessage.value = ''
+
+  try {
+    const { data } = await api.get('/thinking/category', {
+      params: { category: selectedCategory.value },
+    })
+    items.value = Array.isArray(data) ? data : []
+    resetPage()
+  } catch (e) {
+    errorMessage.value = getErrorMessage(e)
+    items.value = []
+  } finally {
+    isLoading.value = false
+  }
+}
+
 const fetchLikeItems = async () => {
   isLoading.value = true
   errorMessage.value = ''
@@ -147,7 +157,7 @@ const changeTab = async (tab) => {
   }
 
   if (tab === 'category') {
-    await fetchAllItems()
+    await fetchCategoryItems()
     return
   }
 
@@ -156,9 +166,9 @@ const changeTab = async (tab) => {
   }
 }
 
-const changeCategory = (category) => {
+const changeCategory = async (category) => {
   selectedCategory.value = category
-  resetPage()
+  await fetchCategoryItems()
 }
 
 const changePage = (page) => {
@@ -234,7 +244,7 @@ onMounted(async () => {
     <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     <p v-if="isLoading" class="loading-message">회고를 불러오는 중입니다.</p>
 
-    <section v-else-if="filteredItems.length === 0" class="empty-state">
+    <section v-else-if="items.length === 0" class="empty-state">
       <p>아직 작성된 회고가 없어요. 첫 번째 회고를 남겨보세요!</p>
     </section>
 
@@ -264,7 +274,7 @@ onMounted(async () => {
       </article>
     </section>
 
-    <nav v-if="filteredItems.length > pageSize" class="pagination" aria-label="회고 목록 페이지">
+    <nav v-if="items.length > pageSize" class="pagination" aria-label="회고 목록 페이지">
       <button
         v-for="page in pageNumbers"
         :key="page"
