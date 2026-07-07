@@ -6,8 +6,7 @@
 <mapper namespace="org.scoula.thinking.mapper.ThinkingMapper">
     <delete id="delete">
         delete from thinking_tbl
-               where id = #{id} AND
-                     password = #{password}
+               where id = #{id}
     </delete>
     <update id="update">
         update thinking_tbl set
