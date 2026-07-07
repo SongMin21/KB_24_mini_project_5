@@ -1,0 +1,58 @@
+:root {
+  /* KB Main Color */
+  --color-primary: #ffbc00;
+  --color-primary-hover: #e6a800;
+  --color-on-primary: #2b2313;
+
+  /* 채도 있는 배경(카테고리 색, 다크 뉴트럴 버튼) 위에 올라가는 흰 텍스트 */
+  --color-on-accent: #ffffff;
+
+  /* 카테고리 구분색 (기존 값 유지, 변수로 승격) */
+  --color-learned: #4caf50;
+  --color-lacked: #ff9800;
+  --color-good: #e91e63;
+
+  /* KB Gray 계열 */
+  --color-background: #f7f5f0;
+  --color-card: #ffffff;
+  --color-text-primary: #545045;
+  --color-text-secondary: #60584c;
+  --color-border: #e6e1d6;
+
+  /* 의미 색상 (브랜드색 아님, 범용 에러/비활성 표시) */
+  --color-danger: #d32f2f;
+  --color-danger-bg: #fdecea;
+  --color-disabled: #c9c2b0;
+
+  /* 반경 */
+  --radius-base: 12px;
+  --radius-input: 8px;
+  --radius-pill: 999px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
