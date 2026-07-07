@@ -58,7 +58,7 @@ class CommentServiceImplTest {
         // impl클래스 내에 get 메서드 선언 필요
         CommentUpdateDTO comment = CommentUpdateDTO.builder()
                 .id(1L)
-                .content("댓글 내용 수정(service)")
+                .content("댓글 내용 수정(controller 구현중)")
                 .password("c123")
                 .build();
 
