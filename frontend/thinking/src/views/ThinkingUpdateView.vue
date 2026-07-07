@@ -186,9 +186,6 @@ onMounted(fetchThinkingDetail)
 </script>
 
 <style scoped>
-/* 아래 스타일은 가이드라인의 구조 이해를 돕기 위한 예시 코드입니다. 
-  실제 레이아웃과 색상은 design.md 스펙에 맞춰 수정하여 사용하세요.
-*/
 .thinking-update-container {
   max-width: 600px;
   margin: 0 auto;
@@ -212,22 +209,33 @@ onMounted(fetchThinkingDetail)
 
 .category-btn {
   padding: 10px 16px;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: var(--radius-pill);
 }
 
-/* design.md 카테고리별 색상 스펙 예시 매핑 */
-.category-btn.active.learned { background-color: #e3f2fd; border-color: #2196f3; color: #1565c0; }
-.category-btn.active.lacked { background-color: #ffebee; border-color: #f44336; color: #c62828; }
-.category-btn.active.good { background-color: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
+.category-btn.active.learned {
+  background-color: var(--color-learned);
+  border-color: var(--color-learned);
+  color: var(--color-on-accent);
+}
+.category-btn.active.lacked {
+  background-color: var(--color-lacked);
+  border-color: var(--color-lacked);
+  color: var(--color-on-accent);
+}
+.category-btn.active.good {
+  background-color: var(--color-good);
+  border-color: var(--color-good);
+  color: var(--color-on-accent);
+}
 
 .form-input, .form-textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
   box-sizing: border-box;
 }
 
@@ -239,27 +247,30 @@ onMounted(fetchThinkingDetail)
 
 .btn {
   padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
   cursor: pointer;
 }
 
 .btn-cancel {
-  background-color: #e0e0e0;
+  background-color: var(--color-card);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
 }
 
 .btn-submit {
-  background-color: #2196f3;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
 }
 
 .btn-submit:disabled {
-  background-color: #bdbdbd;
+  background-color: var(--color-disabled);
+  color: var(--color-on-accent);
   cursor: not-allowed;
 }
 
 .error-message {
-  color: #d32f2f;
+  color: var(--color-danger);
   font-size: 14px;
   margin-top: 6px;
 }
@@ -267,6 +278,6 @@ onMounted(fetchThinkingDetail)
 .loading-state {
   text-align: center;
   padding: 4px 0;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 </style>
