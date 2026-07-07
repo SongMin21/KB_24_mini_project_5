@@ -23,10 +23,9 @@ const commentPassword = ref('')
 
 const editingCommentId = ref(null)
 const editingContent = ref('')
-const editingPassword = ref('')
 
 const showPasswordModal = ref(false)
-const passwordModalMode = ref('') // 'comment-update' | 'comment-delete'
+const passwordModalMode = ref('') // 'delete' | 'comment-update' | 'comment-delete'
 const passwordInput = ref('')
 const passwordError = ref('')
 const targetCommentId = ref(null)
@@ -80,9 +79,14 @@ const goToUpdate = () => {
   router.push({ name: 'thinking-update', params: { id: props.id } })
 }
 
-// TODO: DELETE /api/thinking/{id} 백엔드 추가 후 연동
 const handleDeleteClick = () => {
-  alert('삭제 기능은 곧 지원 예정입니다.')
+  if (!confirm('정말 삭제하시겠습니까?')) return
+  openPasswordModal(null, 'delete')
+}
+
+const handleCommentDeleteClick = (comment) => {
+  if (!confirm('정말 삭제하시겠습니까?')) return
+  openPasswordModal(comment.id, 'comment-delete')
 }
 
 const handleLike = async () => {
@@ -132,16 +136,41 @@ const closePasswordModal = () => {
   passwordError.value = ''
 }
 
+const startEditComment = (comment) => {
+  editingCommentId.value = comment.id
+  editingContent.value = comment.content
+}
+
 const cancelEdit = () => {
   editingCommentId.value = null
   editingContent.value = ''
-  editingPassword.value = ''
+}
+
+const requestSaveEdit = () => {
+  if (!editingContent.value.trim()) return
+  openPasswordModal(editingCommentId.value, 'comment-update')
 }
 
 const confirmPassword = async () => {
   if (!passwordInput.value) return
 
-  if (passwordModalMode.value === 'comment-delete') {
+  if (passwordModalMode.value === 'delete') {
+    try {
+      await api.delete(`/thinking/${props.id}`, {
+        params: { password: passwordInput.value },
+      })
+      closePasswordModal()
+      router.push({ name: 'thinking-list' })
+    } catch (e) {
+      if (e.response?.status === 401) {
+        passwordError.value = '비밀번호가 일치하지 않습니다.'
+        return
+      }
+      const msg = e.response?.data ?? '오류가 발생했습니다.'
+      console.error(msg)
+      alert(msg)
+    }
+  } else if (passwordModalMode.value === 'comment-delete') {
     try {
       await api.delete(`/comment/${targetCommentId.value}`, {
         data: { password: passwordInput.value },
@@ -158,33 +187,24 @@ const confirmPassword = async () => {
       alert(msg)
     }
   } else if (passwordModalMode.value === 'comment-update') {
-    const comment = comments.value.find((c) => c.id === targetCommentId.value)
-    editingCommentId.value = targetCommentId.value
-    editingContent.value = comment.content
-    editingPassword.value = passwordInput.value
-    closePasswordModal()
-  }
-}
-
-const saveEditedComment = async () => {
-  if (!editingContent.value.trim()) return
-  try {
-    const { data } = await api.put(`/comment/${editingCommentId.value}`, {
-      content: editingContent.value,
-      password: editingPassword.value,
-    })
-    const idx = comments.value.findIndex((c) => c.id === editingCommentId.value)
-    comments.value[idx] = data
-    cancelEdit()
-  } catch (e) {
-    if (e.response?.status === 401) {
-      alert('비밀번호가 일치하지 않습니다.')
+    try {
+      const { data } = await api.put(`/comment/${targetCommentId.value}`, {
+        content: editingContent.value,
+        password: passwordInput.value,
+      })
+      const idx = comments.value.findIndex((c) => c.id === targetCommentId.value)
+      comments.value[idx] = data
       cancelEdit()
-      return
+      closePasswordModal()
+    } catch (e) {
+      if (e.response?.status === 401) {
+        passwordError.value = '비밀번호가 일치하지 않습니다.'
+        return
+      }
+      const msg = e.response?.data ?? '오류가 발생했습니다.'
+      console.error(msg)
+      alert(msg)
     }
-    const msg = e.response?.data ?? '오류가 발생했습니다.'
-    console.error(msg)
-    alert(msg)
   }
 }
 </script>
@@ -247,7 +267,7 @@ const saveEditedComment = async () => {
               <textarea v-model="editingContent" class="edit-textarea"></textarea>
               <div class="comment-edit-buttons">
                 <button type="button" class="cancel-btn" @click="cancelEdit">취소</button>
-                <button type="button" class="save-btn" @click="saveEditedComment">저장</button>
+                <button type="button" class="save-btn" @click="requestSaveEdit">저장</button>
               </div>
             </template>
             <template v-else>
@@ -258,14 +278,14 @@ const saveEditedComment = async () => {
                   <button
                     type="button"
                     class="edit-btn"
-                    @click="openPasswordModal(comment.id, 'comment-update')"
+                    @click="startEditComment(comment)"
                   >
                     수정
                   </button>
                   <button
                     type="button"
                     class="delete-btn"
-                    @click="openPasswordModal(comment.id, 'comment-delete')"
+                    @click="handleCommentDeleteClick(comment)"
                   >
                     삭제
                   </button>
