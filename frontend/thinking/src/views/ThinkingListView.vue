@@ -28,9 +28,9 @@ const categories = [
 ]
 
 const categoryColorMap = {
-  LEARNED: '#4CAF50',
-  LACKED: '#FF9800',
-  GOOD: '#E91E63',
+  LEARNED: 'var(--color-learned)',
+  LACKED: 'var(--color-lacked)',
+  GOOD: 'var(--color-good)',
 }
 
 const categoryLabelMap = {
@@ -260,7 +260,7 @@ onMounted(async () => {
         <div class="card-top">
           <span
             class="category-badge"
-            :style="{ backgroundColor: categoryColorMap[item.category] || '#4A90D9' }"
+            :style="{ backgroundColor: categoryColorMap[item.category] || 'var(--color-primary)' }"
           >
             {{ categoryLabelMap[item.category] || item.category }}
           </span>
@@ -294,7 +294,7 @@ onMounted(async () => {
   width: min(1080px, calc(100% - 32px));
   margin: 0 auto;
   padding: 56px 0 72px;
-  color: #20242a;
+  color: var(--color-text-primary);
 }
 
 .list-header {
@@ -331,10 +331,10 @@ onMounted(async () => {
 .category-filter-button,
 .search-button,
 .page-button {
-  border: 1px solid #d9e2ec;
-  border-radius: 8px;
-  background: #fff;
-  color: #374151;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  background: var(--color-card);
+  color: var(--color-text-secondary);
   font-size: 14px;
   font-weight: 700;
   line-height: 1;
@@ -352,16 +352,16 @@ onMounted(async () => {
 .category-filter-button:hover,
 .search-button:hover,
 .page-button:hover {
-  border-color: #4a90d9;
-  color: #4a90d9;
+  border-color: var(--color-primary);
+  color: var(--color-text-primary);
 }
 
 .tab-button.active,
 .category-filter-button.active,
 .page-button.active {
-  border-color: #4a90d9;
-  background: #4a90d9;
-  color: #fff;
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
 }
 
 .filter-controls {
@@ -373,23 +373,24 @@ onMounted(async () => {
 
 .date-input {
   min-height: 42px;
-  border: 1px solid #d9e2ec;
-  border-radius: 8px;
-  color: #20242a;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  color: var(--color-text-primary);
   font-size: 14px;
   padding: 0 14px;
 }
 
 .search-button {
-  background: #20242a;
-  border-color: #20242a;
-  color: #fff;
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  color: var(--color-on-accent);
 }
 
 .search-button:hover {
-  background: #343b44;
-  border-color: #343b44;
-  color: #fff;
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  color: var(--color-on-accent);
+  filter: brightness(0.9);
 }
 
 .error-message,
@@ -401,11 +402,11 @@ onMounted(async () => {
 }
 
 .error-message {
-  color: #d93025;
+  color: var(--color-danger);
 }
 
 .loading-message {
-  color: #4a5568;
+  color: var(--color-text-secondary);
 }
 
 .card-grid {
@@ -419,11 +420,11 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid #e5eaf0;
-  border-radius: 8px;
-  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  background: var(--color-card);
   padding: 20px;
-  box-shadow: 0 6px 18px rgba(20, 37, 63, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   transition:
     box-shadow 0.2s ease,
@@ -433,8 +434,8 @@ onMounted(async () => {
 
 .thinking-card:hover,
 .thinking-card:focus {
-  border-color: #c7d8ec;
-  box-shadow: 0 12px 28px rgba(20, 37, 63, 0.14);
+  border-color: var(--color-primary);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
   outline: none;
   transform: translateY(-3px);
 }
@@ -450,8 +451,8 @@ onMounted(async () => {
   display: inline-flex;
   align-items: center;
   min-height: 28px;
-  border-radius: 999px;
-  color: #fff;
+  border-radius: var(--radius-pill);
+  color: var(--color-on-accent);
   font-size: 12px;
   font-weight: 800;
   padding: 0 10px;
@@ -460,7 +461,7 @@ onMounted(async () => {
 
 .created-date {
   margin-left: auto;
-  color: #6b7280;
+  color: var(--color-text-secondary);
   font-size: 13px;
   white-space: nowrap;
 }
@@ -468,7 +469,7 @@ onMounted(async () => {
 .card-title {
   flex: 1;
   margin: 0;
-  color: #20242a;
+  color: var(--color-text-primary);
   font-size: 16px;
   font-weight: 800;
   line-height: 1.45;
@@ -479,7 +480,7 @@ onMounted(async () => {
 .card-meta {
   display: flex;
   gap: 16px;
-  color: #4b5563;
+  color: var(--color-text-secondary);
   font-size: 14px;
   font-weight: 700;
 }
@@ -491,16 +492,16 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   gap: 18px;
-  border: 1px dashed #c8d5e2;
-  border-radius: 8px;
-  background: #f8fbfe;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-input);
+  background: var(--color-background);
   text-align: center;
   padding: 36px 18px;
 }
 
 .empty-state p {
   margin: 0;
-  color: #4b5563;
+  color: var(--color-text-secondary);
   font-size: 16px;
   font-weight: 700;
 }
