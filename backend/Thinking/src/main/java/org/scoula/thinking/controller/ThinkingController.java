@@ -3,6 +3,7 @@ package org.scoula.thinking.controller;
 import lombok.extern.log4j.Log4j2;
 import org.scoula.thinking.dto.ThinkingCreateDTO;
 import org.scoula.thinking.dto.ThinkingDTO;
+import org.scoula.thinking.dto.ThinkingDeleteDTO;
 import org.scoula.thinking.dto.ThinkingUpdateDTO;
 import org.scoula.thinking.service.ThinkingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,16 +55,27 @@ public class ThinkingController {
 
     // 복원준
 
-    @PutMapping("")
-    public ResponseEntity<String> updateThinking(@RequestBody ThinkingUpdateDTO dto){
+    @PutMapping("/{id}")
+    public ResponseEntity<ThinkingDTO> updateThinking(@PathVariable long id, @RequestBody ThinkingUpdateDTO dto){
         log.info("게시글 수정 요청" + dto);
+        dto.setId(id);
+        return ResponseEntity.ok(service.updateThinking(dto));
+    }
 
-        //서비스 계층 로직 실행
-        if(service.updateThinking(dto)){
-            return ResponseEntity.ok("success");
-        } else {
-            return ResponseEntity.status(401).body("fail");
-        }
+    @GetMapping("/category")
+    public ResponseEntity<List<ThinkingDTO>> getByCategory(@RequestParam("category") String category){
+        log.info("REST API 카테고리별 조회 요청 : " + category);
+        List<ThinkingDTO> list = service.getByCategory(category);
+        return ResponseEntity.ok(list);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ThinkingDTO> deleteThinking(@PathVariable long id, @RequestParam String password) {
+        ThinkingDeleteDTO dto = ThinkingDeleteDTO.builder()
+                .id(id)
+                .password(password)
+                .build();
+        return ResponseEntity.ok(service.deleteThinking(dto));
     }
   
     // 이현서
@@ -78,7 +90,7 @@ public class ThinkingController {
     public ResponseEntity<ThinkingDTO> create(@RequestBody ThinkingCreateDTO thinking){
         return ResponseEntity.ok(service.create(thinking));
     }
-  
+
     @GetMapping("/{id}")
     public ResponseEntity<ThinkingDTO> getListOne(@PathVariable Long id){
         return ResponseEntity.ok(service.getListOne(id));
