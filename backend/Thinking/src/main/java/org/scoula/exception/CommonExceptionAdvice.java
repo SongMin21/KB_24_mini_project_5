@@ -17,6 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 public class CommonExceptionAdvice {
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handle404(NoHandlerFoundException e) {
-        return "/resources/index.html";
+        return "forward:/resources/index.html";
     }
 }

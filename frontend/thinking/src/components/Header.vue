@@ -51,16 +51,16 @@ const goToCreate = () => {
 
 .write-btn {
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 8px 18px;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   font-size: 14px;
   font-weight: 600;
   transition: background-color 0.15s ease;
 }
 
 .write-btn:hover {
-  background-color: #3d7ab8;
+  background-color: var(--color-primary-hover);
 }
 </style>
